@@ -13,27 +13,20 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
 
-    coffees = db.relationship("Coffee", back_populates="user")
-    reviews = association_proxy("coffees", "review")
+    reviews = db.relationship("Review", back_populates="user")
+    coffees = association_proxy("reviews", "coffee")
 
 
-'''
-user>- userCoffee -<coffee
 
-'''
+
 class Coffee(db.Model, SerializerMixin):
     __tablename__ = "coffee_table"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user_table.id"))
-    review_id = db.Column(db.Integer, db.ForeignKey("review_table.id"))
 
-    user = db.relationship("User", back_populates="coffees")
-    review = db.relationship("Review", back_populates = "coffees")
-
-
-
+    reviews = db.relationship("Review", back_populates="coffee")
+    users = association_proxy("reviews", "user")
 
 
 
@@ -42,8 +35,13 @@ class Review(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+
+    user_id = db.Column(db.Integer, db.ForeignKey("user_table.id"))
+    coffee_id = db.Column(db.Integer, db.ForeignKey("coffee_table.id"))
     
-    coffees = db.relationship("Coffee", back_populates="review")
-    users = association_proxy("coffees", "user")
+
+    user = db.relationship("User", back_populates="reviews")
+    coffee = db.relationship("Coffee", back_populates="reviews")
 
 

@@ -1,64 +1,46 @@
 #!/usr/bin/env python3
 
-# Standard library imports
-from random import randint, choice as rc
-
-# Remote library imports
-from faker import Faker
-
-# Local imports
 from app import app
-from models import db
+from models import db  # models go here
+from faker import Faker
+from random import randint, choice, choices
+from models import Coffee, User, Review
+import string
 
-if __name__ == '__main__':
-    fake = Faker()
+fake = Faker()
+
+if __name__ == "__main__":
     with app.app_context():
-        print("Starting seed...")
-        # Seed code goes here!
+        Review.query.delete()
+        Coffee.query.delete()
+        User.query.delete()
+        coffees = []
+        used_names = set()
+        for _ in range(10):
+            name = fake.name()
+            if name not in used_names:
+                coffees.append(Coffee(name=name))
+                used_names.add(name)
+        db.session.add_all(coffees)
+        db.session.commit()
 
+        users = []
+        for _ in range(10):
+            users.append(User(username="".join(choices(string.ascii_uppercase, k=5))))
+        db.session.add_all(users)
+        db.session.commit()
 
-# !/usr/bin/env python3
+        reviews = []
 
-# from app import app
-# from models import db  # models go here
-# from faker import Faker
-# from random import randint, choice, choices
-# from models import Client, Server, Message
-# import string
-
-# fake = Faker()
-
-# if __name__ == "__main__":
-#     with app.app_context():
-#         Client.query.delete()
-#         Message.query.delete()
-#         Server.query.delete()
-#         clients: list[Client] = []
-#         used_names: set[str] = set()
-#         for _ in range(10):
-#             name = fake.name()
-#             if name not in used_names:
-#                 clients.append(Client(name=name))
-#                 used_names.add(name)
-#         db.session.add_all(clients)
-#         db.session.commit()
-
-#         servers = []
-#         for _ in range(10):
-#             servers.append(Server(name="".join(choices(string.ascii_uppercase, k=5))))
-#         db.session.add_all(servers)
-#         db.session.commit()
-
-#         messages = []
-
-#         for _ in range(10):
-#             messages.append(
-#                 Message(
-#                     content=fake.paragraph(),
-#                     server_id=choice(servers).id,
-#                     client_id=choice(clients).id,
-#                 )
-#             )
-#         db.session.add_all(messages)
-#         db.session.commit()
-
+        for _ in range(10):
+            reviews.append(
+                Review(
+                    text=fake.paragraph(),
+                    rating=randint(1,5),
+                    user_id=choice(users).id,
+                    coffee_id=choice(coffees).id,
+                    
+                )
+            )
+        db.session.add_all(reviews)
+        db.session.commit()
