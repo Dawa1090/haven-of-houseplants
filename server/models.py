@@ -10,6 +10,8 @@ db = SQLAlchemy()
 class User(db.Model, SerializerMixin):
     __tablename__ = "user_table"
 
+    serialize_rules = ("-reviews.user",)
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
 
@@ -22,6 +24,8 @@ class User(db.Model, SerializerMixin):
 class Coffee(db.Model, SerializerMixin):
     __tablename__ = "coffee_table"
 
+    serialize_rules = ("-reviews.coffee",)
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
 
@@ -32,6 +36,8 @@ class Coffee(db.Model, SerializerMixin):
 
 class Review(db.Model, SerializerMixin):
     __tablename__ = "review_table"
+
+    serialize_rules = ("-user.reviews","-coffee.reviews")
 
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
