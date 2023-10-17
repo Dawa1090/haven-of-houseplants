@@ -28,6 +28,7 @@ class Coffee(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+    image_url = db.Column(db.String, nullable=False)
 
     reviews = db.relationship("Review", back_populates="coffee")
     users = association_proxy("reviews", "user")
