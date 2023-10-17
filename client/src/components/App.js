@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CoffeeMenu from "./CoffeeMenu";
-import CoffeeDetails from "./CoffeeDetails"; // Import CoffeeDetails component
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import Navbar from "./Navbar";
 
 const App = () => {
   const [coffees, setCoffees] = useState([]);
@@ -15,21 +14,16 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
-      <div className="app">
-        <h1 className="AllMenu"> Coffee Menu </h1>
-        <Switch>
-          {/* Route for displaying individual coffee details */}
-          <Route path="/coffees/:id">
-            <CoffeeDetails coffees={coffees} />
-          </Route>
-          {/* Default route for displaying the coffee menu */}
-          <Route path="/" exact>
-            <CoffeeMenu coffees={coffees} />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div className="App">
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path = '/' exact element ={<Home />}/>
+          <Route path = '/coffee' exact element ={<Coffee />}/>
+          <Route path = '/about' exact element ={<About />}/>
+        </Routes>
+      </Router>
+    </div>
   );
 };
 

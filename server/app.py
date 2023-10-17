@@ -18,7 +18,7 @@ db.init_app(app)
 
 
 
-@app.route('/')
+@app.route('/home')
 def index():
     return '<h1>Caffine Connect</h1>'
 
