@@ -1,5 +1,0 @@
-.coffee-image {
-    max-width: 200px; /* Set your desired width */
-    max-height: 200px; /* Set your desired height */
-    object-fit: cover; /* This property ensures the image covers the specified dimensions */
-  }  
