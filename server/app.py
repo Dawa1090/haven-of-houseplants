@@ -4,7 +4,7 @@ from flask import Flask, make_response, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-from models import db  # import your models here!
+from models import db, Coffee, Review, User  # import your models here!
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
@@ -20,7 +20,18 @@ db.init_app(app)
 
 @app.route('/')
 def index():
-    return '<h1>Project Server</h1>'
+    return '<h1>Caffine Connect</h1>'
+
+@app.get("/coffees")
+def get_coffees():
+    coffees = Coffee.query.all()
+    data = [coffee.to_dict() for coffee in coffees]
+    return make_response(jsonify(data), 200)
+
+
+
+
+
 
 
 if __name__ == '__main__':

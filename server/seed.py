@@ -11,36 +11,52 @@ fake = Faker()
 
 if __name__ == "__main__":
     with app.app_context():
-        Review.query.delete()
-        Coffee.query.delete()
         User.query.delete()
-        coffees = []
-        used_names = set()
-        for _ in range(10):
-            name = fake.name()
-            if name not in used_names:
-                coffees.append(Coffee(name=name))
-                used_names.add(name)
-        db.session.add_all(coffees)
-        db.session.commit()
+        Coffee.query.delete()
+        Review.query.delete()
 
         users = []
-        for _ in range(10):
-            users.append(User(username="".join(choices(string.ascii_uppercase, k=5))))
+        usernames = ["Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ivy", "Jack"]
+        for username in usernames:
+            user = User(username=username)
+            users.append(user)
+        
         db.session.add_all(users)
         db.session.commit()
 
-        reviews = []
+        coffees = []
+        coffee_names = ["Espresso", "Latte", "Cappuccino", "Americano", "Mocha", "Macchiato", "Irish Coffee", "Affogato", "Flat White", "Turkish Coffee"]
+        for coffee_name in coffee_names:
+            coffee = Coffee(name=coffee_name)
+            coffees.append(coffee)
+        
+        db.session.add_all(coffees)
+        db.session.commit()
 
-        for _ in range(10):
-            reviews.append(
-                Review(
-                    text=fake.paragraph(),
-                    rating=randint(1,5),
-                    user_id=choice(users).id,
-                    coffee_id=choice(coffees).id,
-                    
-                )
+        
+
+        reviews = []
+        reviews_data = [
+            {"text": "Great coffee!", "rating": 5},
+            {"text": "Love!", "rating": 4},
+            {"text": "Not so good.", "rating": 2},
+            {"text": "Average coffee.", "rating": 3},
+            {"text": "Could be better.", "rating": 2},
+            {"text": "Amazing coffee!", "rating": 5},
+            {"text": "Terrible.", "rating": 1},
+            {"text": "Delicious coffee.", "rating": 4},
+            {"text": "Perfect espresso.", "rating": 5},
+            {"text": "Decent cappuccino.", "rating": 3},
+        ]
+
+        for data in reviews_data:
+            review = Review(
+                text=data["text"],
+                rating=data["rating"],
+                user_id=choice(users).id,
+                coffee_id=choice(coffees).id,
             )
+            reviews.append(review)
+        
         db.session.add_all(reviews)
         db.session.commit()
