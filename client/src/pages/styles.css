@@ -56,16 +56,19 @@
 .coffee-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
+    max-width: 1000px; /* Set a max-width to limit the container size */
+    margin: 0 auto;
   }
   
   .coffee-item {
-    margin: 10px;
+    width: calc(20% - 20px); /* Calculate the width for 5 items in a row with some spacing */
+    margin: 0 10px 20px 10px; /* Adjust the margin between items */
     text-align: center;
   }
   
   .coffee-image {
-    width: 220px; /* Set your preferred width */
-    height: 190px; /* Set your preferred height */
+    width: 100%;
+    height: auto;
+    max-height: 200px; /* Limit the maximum height of images */
   }
-  
