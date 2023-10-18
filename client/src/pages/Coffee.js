@@ -1,13 +1,13 @@
 // Coffee.js
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import ReviewList from "../ReviewList"; // Import ReviewList
+import ReviewList from "../ReviewList"; 
 
 const Coffee = () => {
   const [coffees, setCoffees] = useState([]);
 
   useEffect(() => {
-    // Fetch the coffee data and set it in the state
+    
     fetch("/coffees")
       .then((response) => response.json())
       .then((data) => {

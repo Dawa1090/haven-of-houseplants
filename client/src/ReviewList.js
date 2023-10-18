@@ -5,7 +5,6 @@ const ReviewList = ({ coffeeId }) => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    // Fetch reviews based on coffee ID and set them in the state
     fetch(`/coffees/${coffeeId}/reviews`)
       .then((response) => response.json())
       .then((data) => {

@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Coffee from "./pages/Coffee";
 import About from "./pages/About";
-import ReviewList from "./ReviewList"; // Correct relative path
+import ReviewList from "./ReviewList";
 
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
   const [coffees, setCoffees] = useState([]);
 
   useEffect(() => {
-    // Fetch the coffee data and set it in the state
+   
     fetch("/coffees")
       .then((response) => response.json())
       .then((data) => {
