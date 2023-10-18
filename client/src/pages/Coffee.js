@@ -17,7 +17,7 @@ const Coffee = () => {
 
   return (
     <div className="Coffee">
-      <h2>Coffee Menu</h2>
+      <h2></h2>
       <div className="coffee-list">
         {coffees.map((coffee) => (
           <div key={coffee.id} className="coffee-item">

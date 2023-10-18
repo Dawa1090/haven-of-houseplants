@@ -51,3 +51,21 @@
 .signUpClass{
     color: rgb(249, 249, 249);
 }
+
+/* styles.css */
+.coffee-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .coffee-item {
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .coffee-image {
+    width: 220px; /* Set your preferred width */
+    height: 190px; /* Set your preferred height */
+  }
+  
