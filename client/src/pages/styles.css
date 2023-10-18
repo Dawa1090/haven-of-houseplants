@@ -69,6 +69,7 @@
   
   .coffee-image {
     width: 100%;
-    height: auto;
-    max-height: 200px; /* Limit the maximum height of images */
+    height: 200px; /* Set a fixed height for uniformity */
+    object-fit: cover; /* Ensure images cover the specified height without distortion */
+    max-height: 100%; /* Ensure the image height does not exceed the container height */
   }
