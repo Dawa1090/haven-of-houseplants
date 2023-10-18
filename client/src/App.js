@@ -25,16 +25,27 @@ function App() {
 
   function attemptLogin(userInfo) {
     fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accepts: "application/json",
-      },
-      body: JSON.stringify(userInfo),
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accepts: "application/json",
+        },
+        body: JSON.stringify(userInfo),
     })
-      .then((res) => res.json())
-      .then((data) => setCurrentUser(data));
-  }
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        } else if (res.status === 404) {
+            throw new Error("User not found");
+        } else {
+            throw new Error("Invalid username or password");
+        }
+    })
+    .then((data) => setCurrentUser(data))
+    .catch((error) => {
+        window.alert(error.message); // Display an alert with the error message
+    });
+}
 
   function logout() {
     fetch("/logout", { method: "DELETE" }).then((res) => {

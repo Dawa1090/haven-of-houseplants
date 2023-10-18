@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Login from "./Login";
 import Signup from "./Signup";
 import UserDetails from "./UserDetails";
-import './styles.css'; 
+import './styles.css';
 
 function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
-    console.log(currentUser);
+    useEffect(() => {
+        if (currentUser && currentUser.username) {
+            window.alert(`You have successfully logged in.`);
+        } else {
+            window.alert("You have successfully logged out.");
+        }
+    }, [currentUser]);
 
     return (
         <div className='background-image'>
@@ -21,7 +27,7 @@ function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
                     </div>
                 ) : (
                     <div>
-                        <Login attemptLogin={attemptLogin}  />
+                        <Login attemptLogin={attemptLogin} />
                         <Signup attemptSignup={attemptSignup} />
                     </div>
                 )}
