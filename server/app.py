@@ -86,25 +86,12 @@ def get_reviews_by_id(id: int):
         make_response(jsonify({"error": "no right"}), 404)
     return make_response(jsonify(review.to_dict()), 200)
 
-# @app.post("/reviews", methods=["POST"])
-# def post_reviews():
-#     data = request.json
-#     try:
-#         review = Review(text=data.get("text"), rating=data.get("rating"), user_id=data.get("user_id"), coffee_id=data.get("coffee_id"))
-#         db.session.add(review)
-#         db.session.commit()
-#         return make_response(jsonify(review.to_dict()), 201)
-#     except Exception as e:
-#         print(e)
-#         return make_response(jsonify({"error": "invalid review: " + str(e)}), 405)
-
-
 
 @app.route("/reviews", methods=["POST"])
 def post_reviews():
     data = request.json
     try:
-        review = Review(column=data.get("column"))  # Make sure to replace "column" with the actual column name you want to populate.
+        review = Review(column=data.get("column")) 
         db.session.add(review)
         db.session.commit()
         return make_response(jsonify(review.to_dict()), 201)
@@ -141,9 +128,6 @@ def delete_review(id: int):
     db.session.commit()
 
     return make_response(jsonify({}), 200)
-
-
-
 
 
 
