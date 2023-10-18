@@ -63,11 +63,11 @@ def get_coffees():
     data = [coffee.to_dict() for coffee in coffees]
     return make_response(jsonify(data), 200)
 
-@app.get("/coffees/<int:id>")
+@app.route("/coffees/<int:id>", methods=["GET"])
 def get_coffee_by_id(id: int):
     coffee = Coffee.query.filter(Coffee.id == id).first()
     if not coffee:
-        make_response(jsonify({"error": "no right"}), 404)
+        return make_response(jsonify({"error": "Coffee not found"}), 404)
     return make_response(jsonify(coffee.to_dict()), 200)
 
 # REVIEW
@@ -86,17 +86,39 @@ def get_reviews_by_id(id: int):
         make_response(jsonify({"error": "no right"}), 404)
     return make_response(jsonify(review.to_dict()), 200)
 
-@app.post("/reviews")
+# @app.post("/reviews", methods=["POST"])
+# def post_reviews():
+#     data = request.json
+#     try:
+#         review = Review(text=data.get("text"), rating=data.get("rating"), user_id=data.get("user_id"), coffee_id=data.get("coffee_id"))
+#         db.session.add(review)
+#         db.session.commit()
+#         return make_response(jsonify(review.to_dict()), 201)
+#     except Exception as e:
+#         print(e)
+#         return make_response(jsonify({"error": "invalid review: " + str(e)}), 405)
+
+
+
+@app.route("/reviews", methods=["POST"])
 def post_reviews():
     data = request.json
     try:
-        review = Review(column=data.get("column"))
+        review = Review(column=data.get("column"))  # Make sure to replace "column" with the actual column name you want to populate.
         db.session.add(review)
         db.session.commit()
         return make_response(jsonify(review.to_dict()), 201)
     except Exception as e:
         print(e)
         return make_response(jsonify({"error": "invalid review" + str(e)}), 405)
+
+
+@app.route("/coffees/<int:id>/reviews", methods=["GET"])
+def get_reviews_by_coffee_id(id: int):
+    reviews = Review.query.filter(Review.coffee_id == id).all()
+    data = [review.to_dict() for review in reviews]
+    return make_response(jsonify(data), 200)
+
     
 @app.patch("/reviews/<int:id>")
 def patch_review(id: int):
