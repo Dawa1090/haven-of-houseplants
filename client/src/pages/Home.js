@@ -6,11 +6,12 @@ import UserDetails from "./UserDetails";
 import './styles.css'; 
 
 function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
+    console.log(currentUser)
     return (
         <div className='background-image'>
             <div className='headerContainer'>
                 <h1 className='titleContainer'>Let's Caffeine</h1>
-                {currentUser ? (
+                {currentUser.username ? (
                     <div>
                         <UserDetails currentUser={currentUser} logout={logout} />
                         <Link to='/coffee'>

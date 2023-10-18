@@ -8,7 +8,7 @@ import ReviewList from "./ReviewList";
 
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
 
   function attemptSignup(userInfo) {
     fetch("/users", {
