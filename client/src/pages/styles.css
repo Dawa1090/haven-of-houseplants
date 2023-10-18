@@ -57,13 +57,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 1000px; /* Set a max-width to limit the container size */
+    max-width: 1200px; /* Set a max-width to limit the container size */
     margin: 0 auto;
   }
   
   .coffee-item {
-    width: calc(20% - 20px); /* Calculate the width for 5 items in a row with some spacing */
-    margin: 0 10px 20px 10px; /* Adjust the margin between items */
+    width: calc(20% - 40px); /* Calculate the width for 5 items in a row with increased spacing */
+    margin: 0 20px 40px 20px; /* Adjusted margin for increased space between items */
     text-align: center;
   }
   
