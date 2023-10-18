@@ -50,6 +50,17 @@ function App() {
         });
     }, []);
 
+  //   useEffect(() => {
+  //     fetch("/coffees").then((res) => {
+  //         if (res.ok) {
+  //             res.json().then((data) => setcoffees(data));
+  //         } else {
+  //             //res.text().then((data) => console.log(data));
+  //             setcoffees([]);
+  //         }
+  //     });
+  // }, [currentUser]);
+
     return (
         <div className="App">
             <Router>

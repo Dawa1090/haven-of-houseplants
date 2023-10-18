@@ -12,18 +12,15 @@ function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
                 {currentUser ? (
                     <div>
                         <UserDetails currentUser={currentUser} logout={logout} />
-                        <Link to='/home'>
+                        <Link to='/coffee'>
                             <button> Menu awaits! </button>
-                            <Signup attemptSignup={attemptSignup} />
                         </Link>
                     </div>
                 ) : (
                     <div>
-                        <Login attemptLogin={attemptLogin} />
+                        <Login attemptLogin={attemptLogin}  />
                         <Signup attemptSignup={attemptSignup} />
-                        <Link to='/home'>
-                            <button> Menu awaits! </button>
-                        </Link>
+                        
                     </div>
                 )}
             </div>
