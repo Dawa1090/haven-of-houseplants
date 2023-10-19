@@ -93,7 +93,7 @@ def get_reviews_by_id(id: int):
 def post_reviews():
     data = request.json
     try:
-        review = Review(column=data.get("column")) 
+        review = Review(text=data.get("text"), rating=data.get("rating"), user_id=data.get("user_id"), coffee_id=data.get("coffee_id")) 
         db.session.add(review)
         db.session.commit()
         return make_response(jsonify(review.to_dict()), 201)
