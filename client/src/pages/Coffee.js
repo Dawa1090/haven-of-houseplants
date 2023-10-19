@@ -30,11 +30,30 @@ const Coffee = () => {
       })
       .then((review) => {
         console.log("Review posted successfully:", review);
-        
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
-       
+      });
+  };
+
+  const deleteReview = (coffeeId, reviewId) => {
+    fetch(`/reviews/${reviewId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Remove the deleted review from the local state
+          const updatedCoffees = coffees.map((coffee) => ({
+            ...coffee,
+            reviews: coffee.reviews.filter((review) => review.id !== reviewId),
+          }));
+          setCoffees(updatedCoffees);
+        } else {
+          throw new Error("Network response was not ok.");
+        }
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
       });
   };
 
@@ -111,11 +130,22 @@ const Coffee = () => {
               />
             </label>
             <div className="button-group">
-            <button onClick={() => postReview(coffee.id, coffee.reviewState.reviewText, coffee.reviewState.reviewRating, 1)}>
-              Submit Review
-            </button>
-            <Link to={`/coffee/${coffee.id}/reviews`} className= "heelo">See Reviews</Link>
-          </div>
+              <button onClick={() => postReview(coffee.id, coffee.reviewState.reviewText, coffee.reviewState.reviewRating, 1)}>
+                Submit Review
+              </button>
+              <Link to={`/coffee/${coffee.id}/reviews`} className="hello">See Reviews</Link>
+            </div>
+            <div className="reviews">
+              {coffee.reviews.map((review) => (
+                <div key={review.id} className="review">
+                  <p className="review-text">{review.text}</p>
+                  <p className="review-rating">Rating: {review.rating}</p>
+                  <div className="review-buttons">
+                    <button onClick={() => deleteReview(coffee.id, review.id)}>Delete</button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
