@@ -8,9 +8,9 @@ import './styles.css';
 function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
     useEffect(() => {
         if (currentUser && currentUser.username) {
-            window.alert(`You have successfully logged in.`);
+            // window.alert(`You have successfully logged in.`);
         } else {
-            window.alert("You have successfully logged out.");
+            // window.alert("You have successfully logged out.");
         }
     }, [currentUser]);
 

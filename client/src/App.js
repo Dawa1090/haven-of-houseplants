@@ -43,7 +43,7 @@ function App() {
     })
     .then((data) => setCurrentUser(data))
     .catch((error) => {
-        window.alert(error.message); // Display an alert with the error message
+        window.alert(error.message);
     });
 }
 
