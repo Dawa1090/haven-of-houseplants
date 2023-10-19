@@ -1,5 +1,6 @@
 // Login.js
 import React, { useState } from "react";
+import './About.css';
 
 function Login({ attemptLogin }) {
     const [username, setUsername] = useState("");
@@ -15,7 +16,7 @@ function Login({ attemptLogin }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Login</h2>
+            <h2 className="login">Login</h2>
 
             <input
                 type="text"

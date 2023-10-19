@@ -17,7 +17,7 @@ function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
     return (
         <div className='background-image'>
             <div className='headerContainer'>
-                <h1 className='titleContainer'>Let's Caffeine</h1>
+                <h1 className='titleContainer'>Coffee Heaven</h1>
                 {currentUser && currentUser.username ? (
                     <div>
                         <UserDetails currentUser={currentUser} logout={logout} />

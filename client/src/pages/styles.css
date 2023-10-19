@@ -69,3 +69,7 @@
     object-fit: cover;
     max-height: 100%;
 }
+
+.titleContainer{
+    justify-content: center;
+}
