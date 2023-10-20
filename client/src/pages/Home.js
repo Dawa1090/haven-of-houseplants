@@ -4,6 +4,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import UserDetails from "./UserDetails";
 import './styles.css';
+import './About.css';
 
 function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
     useEffect(() => {

@@ -70,16 +70,18 @@
 }
 
 .titleContainer{
-    justify-content: center;
+    justify-content: right;
+    
 }
 
 .headerContainer {
     background-color:rgba(217, 203, 203, 0.513);
     display: inline-block;
-    
+    padding: 40px;
+    justify-content: right;
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 15%;
+    top: 40%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     

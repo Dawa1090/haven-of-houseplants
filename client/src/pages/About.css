@@ -1,5 +1,6 @@
 
 
+
 .quote {
     text-align: center;
     margin: 50px 0;
@@ -56,3 +57,50 @@
   .login {
     color: #ffffff;
   }
+
+  input[type=text] {
+    padding:10px;
+    
+    border:0;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  }
+  
+  input[type="password"] {
+    padding:10px;
+    border:0;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    margin-right: 20px;
+  }
+  
+  .rounded-input[type="password"] {
+    padding:10px;
+    border-radius:10px;
+  }
+  .headerContainer {
+    width: 200px;
+    padding: 20px;
+    border: 3px solid black; /* Add a black border */
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  background-color: #333; 
+  color: #fff; 
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 20px;
+  font-size: 22px;
+  font-weight: bold; 
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #ff5733; 
+}
+
