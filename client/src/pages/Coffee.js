@@ -14,7 +14,7 @@ const Coffee = () => {
       user_id: userId,
       coffee_id: coffeeId,
     };
-
+  
     fetch("/reviews", {
       method: "POST",
       headers: {
@@ -29,12 +29,21 @@ const Coffee = () => {
         throw new Error("Network response was not ok.");
       })
       .then((review) => {
+        
+        const updatedCoffees = coffees.map((coffee) =>
+          coffee.id === coffeeId
+            ? { ...coffee, reviews: [...coffee.reviews, review] }
+            : coffee
+        );
+       
+        setCoffees(updatedCoffees);
         console.log("Review posted successfully:", review);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
   };
+  
 
   const deleteReview = (coffeeId, reviewId) => {
     fetch(`/reviews/${reviewId}`, {
@@ -76,13 +85,25 @@ const Coffee = () => {
         }
         throw new Error("Network response was not ok.");
       })
-      .then((review) => {
-        console.log("Review updated successfully:", review);
+      .then((updatedReview) => {
+        const updatedCoffees = coffees.map((coffee) => {
+          if (coffee.id === coffeeId) {
+            const updatedReviews = coffee.reviews.map((review) =>
+              review.id === reviewId ? { ...review, text: updatedReview.text, rating: updatedReview.rating } : review
+            );
+            return { ...coffee, reviews: updatedReviews };
+          }
+          return coffee;
+        });
+        setCoffees(updatedCoffees);
+        console.log("Review updated successfully:", updatedReview);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
   };
+
+
 
   const editReview = (coffeeId, reviewId, newText, newRating) => {
     patchReview(coffeeId, reviewId, newText, newRating);
@@ -117,6 +138,7 @@ const Coffee = () => {
       closeEditModal();
     }
   };
+
 
   useEffect(() => {
     fetch("/coffees")
