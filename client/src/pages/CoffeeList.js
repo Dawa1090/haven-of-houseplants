@@ -1,7 +1,7 @@
 import React from "react";
 
 const CoffeeList = ({ coffees }) => {
-  const itemsPerRow = 5; // Number of items per row
+  const itemsPerRow = 5; 
   const groupedCoffees = [];
   for (let i = 0; i < coffees.length; i += itemsPerRow) {
     groupedCoffees.push(coffees.slice(i, i + itemsPerRow));

@@ -1,4 +1,4 @@
-// Login.js
+
 import React, { useState } from "react";
 import './About.css';
 
@@ -26,7 +26,7 @@ function Login({ attemptLogin }) {
             />
 
             <input
-                type="password" // Use type="password" to hide the entered characters
+                type="password" 
                 onChange={handleChangePassword}
                 value={password}
                 placeholder="password"

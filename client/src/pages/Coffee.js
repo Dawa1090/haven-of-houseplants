@@ -151,71 +151,7 @@ const Coffee = () => {
     return <div>Error: {error}</div>;
   }
 
-//   return (
-//     <div className="Coffee">
-//       <h2 className="coffee-list">Coffee List</h2>
-//       <div className="coffee-list">
-//         {coffees.map((coffee) => (
-//           <div key={coffee.id} className="coffee-item">
-//             <img className="coffee-image" src={coffee.image_url} alt={coffee.name} />
-//             <h3>{coffee.name}</h3>
-//             <p>Reviews: {coffee.reviews.length}</p>
-//             <input
-//               type="text"
-//               placeholder="Add your review..."
-//               value={coffee.reviewState.reviewText}
-//               onChange={(e) => {
-//                 const updatedCoffees = coffees.map((c) =>
-//                   c.id === coffee.id
-//                     ? { ...c, reviewState: { ...c.reviewState, reviewText: e.target.value } }
-//                     : c
-//                 );
-//                 setCoffees(updatedCoffees);
-//               }}
-//             />
-//             <label>
-//               Rating:
-//               <input
-//                 type="number"
-//                 min="1"
-//                 max="5"
-//                 value={coffee.reviewState.reviewRating}
-//                 onChange={(e) => {
-//                   const updatedCoffees = coffees.map((c) =>
-//                     c.id === coffee.id
-//                       ? { ...c, reviewState: { ...c.reviewState, reviewRating: parseInt(e.target.value) } }
-//                       : c
-//                   );
-//                   setCoffees(updatedCoffees);
-//                 }}
-//               />
-//             </label>
-//             <div className="button-group">
-//               <button onClick={() => postReview(coffee.id, coffee.reviewState.reviewText, coffee.reviewState.reviewRating, 1)}>
-//                 Submit Review
-//               </button>
-//               <Link to={`/coffee/${coffee.id}/reviews`} className="hello">See Reviews</Link>
-//             </div>
-//             <div className="reviews">
-//               {coffee.reviews.map((review) => (
-//                 <div key={review.id} className="review">
-//                   <p className="review-text">{review.text}</p>
-//                   <p className="review-rating">Rating: {review.rating}</p>
-//                   <div className="review-buttons">
-//                     <button onClick={() => deleteReview(coffee.id, review.id)}>Delete</button>
-//                     <button onClick={() => editReview(coffee.id, review.id, review.text, review.rating)}>Edit</button>
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
 
-// export default Coffee;
 return (
   <div className="Coffee">
     <h2 className="coffee-list">Coffee List</h2>
@@ -227,7 +163,7 @@ return (
           <p>Reviews: {coffee.reviews.length}</p>
           {coffee.reviews.map((review) => (
             <div key={review.id} className="review">
-              {editReviewData.reviewId === review.id ? ( // Show edit fields if the review is being edited
+              {editReviewData.reviewId === review.id ? (
                 <div>
                   <textarea
                     value={editReviewData.text}
@@ -247,7 +183,7 @@ return (
                   <button onClick={closeEditModal}>Cancel</button>
                 </div>
               ) : (
-                // Show the review text and rating
+                
                 <div>
                   <p className="review-text">{review.text}</p>
                   <p className="review-rating">Rating: {review.rating}</p>
