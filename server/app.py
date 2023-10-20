@@ -119,7 +119,7 @@ def patch_review(id: int):
         setattr(review, key, request_data[key])
     db.session.add(review)
     db.session.commit()
-    return make_response(jsonify(review.to_dict(rules=("-left", "-right"))), 200)
+    return make_response(jsonify(review.to_dict()), 200)
 
 @app.delete("/reviews/<int:id>")
 def delete_review(id: int):
