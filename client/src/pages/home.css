@@ -1,0 +1,13 @@
+/* home.css */
+
+.home-container {
+    background-image: url('https://media.istockphoto.com/id/892815818/vector/vector-illustration-with-indoor-houseplants-poster-cover-template-design-with-various.jpg?s=170667a&w=0&k=20&c=pBEmWpZ-2fAiN7P80T525vZrtxeq1tLOpGCSf6htC8E='); /* Replace with the path to your background image */
+    background-size: cover; /* Adjust to your needs */
+    background-position: center; /* Adjust to your needs */
+    background-repeat: no-repeat; /* Adjust to your needs */
+    height: 100vh; /* Set the height to the desired value */
+    color: white; /* Adjust text color for readability */
+    text-align: center;
+    padding: 20px;
+  }
+  

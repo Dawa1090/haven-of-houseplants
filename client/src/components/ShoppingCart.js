@@ -11,7 +11,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart,  }) {
           </div>
         );
       }
-
+      console.log(cart)
   return (
     <div>
       <h2>Shopping Cart</h2>

@@ -123,6 +123,7 @@ function App() {
 
   const [cart, setCart] = useState([]);
 
+  //do something with quantity
   const addToCart = (plant, quantity) => {
     const updatedCart = [...cart, plant];
   setCart(updatedCart);
@@ -140,7 +141,8 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <Navbar />
+      <Navbar 
+        currentUser={currentUser}/>
         <Switch>
           <Route path="/" exact>
             <Home
@@ -152,7 +154,19 @@ function App() {
             />
           </Route>
           <Route path="/plants" exact>
-            <PlantList plants={plants} cart={cart} addToCart={addToCart} />
+            {/* <PlantList plants={plants} cart={cart} addToCart={addToCart} /> */}
+            {isLoggedIn && (
+        <PlantPage
+          plants={filterPlants}
+          onAddPlant={onAddPlant}
+          query={query}
+          onUpdateQuery={onUpdateQuery}
+          cart={cart}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+          currentUser={currentUser}
+        />
+      )}
           </Route>
           <Route path="/cart" exact>
             <ShoppingCart
@@ -166,17 +180,7 @@ function App() {
 
       {isLoggedIn && <Header />}
 
-      {isLoggedIn && (
-        <PlantPage
-          plants={filterPlants}
-          onAddPlant={onAddPlant}
-          query={query}
-          onUpdateQuery={onUpdateQuery}
-          cart={cart}
-          addToCart={addToCart}
-          removeFromCart={removeFromCart}
-        />
-      )}
+
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Login from "./Login";
 import Signup from "./Signup";
 import UserDetails from "./UserDetails";
@@ -7,6 +6,7 @@ import UserDetails from "./UserDetails";
 
 
 function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
+
     useEffect(() => {
         if (currentUser && currentUser.username) {
             //   window.alert(`You have successfully logged in.`);
@@ -18,7 +18,8 @@ function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
     return (
         <div className='background-image'>
             <div className='headerContainer'>
-                <h1 className='titleContainer'></h1>
+                <img src="https://media.istockphoto.com/id/892815818/vector/vector-illustration-with-indoor-houseplants-poster-cover-template-design-with-various.jpg?s=170667a&w=0&k=20&c=pBEmWpZ-2fAiN7P80T525vZrtxeq1tLOpGCSf6htC8E=" alt="Plants" 
+                style={{ width: "50%", height: "auto" }} />
                 {currentUser && currentUser.username ? (
                     <div>
                         <UserDetails currentUser={currentUser} logout={logout} />
@@ -35,3 +36,6 @@ function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
 }
 
 export default Home;
+
+
+

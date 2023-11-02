@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import './style.css'; 
+import { Link } from "react-router-dom";
+import "./PlantCard.css"; 
 
-function PlantCard({ plant, addToCart }) {
+function PlantCard({ plant, addToCart, currentUser }) {
   const [stock, setStock] = useState(true);
-
+  const [quantity, setQuantity] = useState(1);
+  console.log(currentUser)
   const handleAddToCartClick = () => {
-    // Call the addToCart function with the plant's data
-    addToCart(plant);
+    if (quantity > 0) {
+      // Call the addToCart function with the plant's data and the specified quantity
+      addToCart(plant, quantity);
+    }
   };
 
   return (
@@ -21,10 +25,21 @@ function PlantCard({ plant, addToCart }) {
       ) : (
         <button onClick={() => setStock(!stock)}>Out of Stock</button>
       )}
-      <button onClick={handleAddToCartClick}>Add to Cart</button>
+      {currentUser && currentUser.username ? (
+      <input
+        type="number"
+        value={quantity}
+        onChange={(e) => setQuantity(e.target.value)}
+        min="1"
+      />
+      ) : null}
+      {currentUser && currentUser.username ? (
+        <button onClick={handleAddToCartClick}>Add to Cart</button>
+      ) : null}
+    
+                
     </div>
   );
 }
 
 export default PlantCard;
-

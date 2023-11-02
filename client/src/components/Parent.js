@@ -28,6 +28,7 @@ function ParentComponent() {
       checkout={checkout}
       cart={cart}
     />
+    
   );
 }
    
