@@ -2,8 +2,8 @@ from flask import Flask, make_response, jsonify, request, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
-from models import db, Coffee, Review, User
-
+from models import db, User, Plant
+from flask_cors import CORS
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -14,10 +14,12 @@ app.secret_key = 'DAWA'
 db.init_app(app)
 bcrypt = Bcrypt(app)
 migrate = Migrate(app, db)
+CORS(app)
 
-@app.route('/home')
-def index():
-    return '<h1>Caffeine Connect</h1'
+
+# @app.route('/home')
+# def index():
+#     return '<h1>Grown with Love</h1'
 
 @app.route("/users", methods=["POST"])
 def create_user():
@@ -57,79 +59,56 @@ def logout():
     session.pop("user_id")
     return {"message": "Logged out"}, 200
 
-# COFFEE
+# PLANT
 
-@app.route("/coffees", methods=["GET"])
-def get_coffees():
-    coffees = Coffee.query.all()
-    data = [coffee.to_dict() for coffee in coffees]
+@app.route("/plants", methods=["GET"])
+def get_plants():
+    plants = Plant.query.all()
+    data = [plant.to_dict() for plant in plants]
     return make_response(jsonify(data), 200)
 
-@app.route("/coffees/<int:id>", methods=["GET"])
-def get_coffee_by_id(id: int):
-    coffee = Coffee.query.filter(Coffee.id == id).first()
-    if not coffee:
+@app.route("/plants/<int:id>", methods=["GET"])
+def get_plant_by_id(id: int):
+    plant = Plant.query.filter(Plant.id == id).first()
+    if not plant:
         return make_response(jsonify({"error": "Coffee not found"}), 404)
-    return make_response(jsonify(coffee.to_dict()), 200)
+    return make_response(jsonify(plant.to_dict()), 200)
 
-# REVIEW
-
-@app.get("/reviews")
-def get_reviews():
-    reviews = Review.query.all()
-    data = [review.to_dict() for review in reviews]
-    return make_response(jsonify(data), 200)
-
-
-@app.get("/reviews/<int:id>")
-def get_reviews_by_id(id: int):
-    review = Review.query.filter(Review.id == id).first()
-    if not review:
-        make_response(jsonify({"error": "no right"}), 404)
-    return make_response(jsonify(review.to_dict()), 200)
-
-
-@app.route("/reviews", methods=["POST"])
-def post_reviews():
+@app.route("/plants", methods=["POST"])
+def post_plants():
     data = request.json
     try:
-        review = Review(text=data.get("text"), rating=data.get("rating"), user_id=data.get("user_id"), coffee_id=data.get("coffee_id")) 
-        db.session.add(review)
+        plant = Plant(name=data.get("name"), image=data.get("image"), price=data.get("price")) 
+        db.session.add(plant)
         db.session.commit()
-        return make_response(jsonify(review.to_dict()), 201)
+        return make_response(jsonify(plant.to_dict()), 201)
     except Exception as e:
         print(e)
-        return make_response(jsonify({"error": "invalid review" + str(e)}), 405)
-
-
-@app.route("/coffees/<int:id>/reviews", methods=["GET"])
-def get_reviews_by_coffee_id(id: int):
-    reviews = Review.query.filter(Review.coffee_id == id).all()
-    data = [review.to_dict() for review in reviews]
-    return make_response(jsonify(data), 200)
-
+        return make_response(jsonify({"error": "Invalid plant data: " + str(e)}), 405)
     
-@app.patch("/reviews/<int:id>")
-def patch_review(id: int):
-    review = Review.query.filter(Review.id == id).first()
-    if not review:
+
+@app.patch("/plants/<int:id>")
+def patch_plant(id: int):
+    plant = Plant.query.filter(Plant.id == id).first()
+    if not plant:
         return make_response(jsonify({"error": f"id {id} not found"}), 404)
     request_data = request.get_json()
     for key in request_data:
-        setattr(review, key, request_data[key])
-    db.session.add(review)
+        setattr(plant, key, request_data[key])
+    db.session.add(plant)
     db.session.commit()
-    return make_response(jsonify(review.to_dict()), 200)
+    return make_response(jsonify(plant.to_dict()), 200)
 
-@app.delete("/reviews/<int:id>")
-def delete_review(id: int):
-    review = Review.query.filter(Review.id == id).first()
-    if not review:
+@app.delete("/plants/<int:id>")
+def delete_plant(id: int):
+    plant = Plant.query.filter(Plant.id == id).first()
+    if not plant:
         return make_response(jsonify({"error":f"id {id} not found"}), 404)
-    db.session.delete(review)
+    db.session.delete(plant)
     db.session.commit()
 
     return make_response(jsonify({}), 200)
+
 
 
 

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import Login from "./Login";
 import Signup from "./Signup";
 import UserDetails from "./UserDetails";
-import './styles.css';
-import './About.css';
+
+
 
 function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
     useEffect(() => {
@@ -18,13 +18,10 @@ function Home({ currentUser, attemptLogin, attemptSignup, logout }) {
     return (
         <div className='background-image'>
             <div className='headerContainer'>
-                <h1 className='titleContainer'>Coffee Heaven</h1>
+                <h1 className='titleContainer'></h1>
                 {currentUser && currentUser.username ? (
                     <div>
                         <UserDetails currentUser={currentUser} logout={logout} />
-                        <Link to='/coffee'>
-                            <button> Coffee Time </button>
-                        </Link>
                     </div>
                 ) : (
                     <div>

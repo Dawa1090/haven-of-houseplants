@@ -1,22 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../pages/styles.css';
-import '../pages/About.css';
+import './style.css'; 
 
 function Navbar({ currentUser }) {
-    return (
-        <div className="navbar">
-            <div className="rightside">
-                <Link className='Home' to='/'>Home</Link>
-                {currentUser && currentUser.username ? (
-                    <Link className='Menu' to='/coffee'>Coffee</Link>
+  return (
+    <div className="navbar">
+      <div className="rightside">
+        <Link className='Home' to='/'>Home</Link>
+        {currentUser && currentUser.username ? (
+                    <Link className='Plants' to='/plants'>Plants</Link>
                 ) : (
-                    <span className='disabled-link'>Coffee</span>
+                    <span className='disabled-link'>Plants</span>
                 )}
-                <Link className='about' to='/about'>About</Link>
-            </div>
-        </div>
-    );
+        <Link className='Cart' to='/cart'>Shopping Cart</Link>
+      </div>
+    </div>
+  );
 }
 
 export default Navbar;

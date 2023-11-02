@@ -3,7 +3,7 @@ from app import app
 from models import db  
 from faker import Faker
 from random import randint, choice, choices
-from models import Coffee, User, Review
+from models import User, Plant
 import string
 
 fake = Faker()
@@ -11,9 +11,8 @@ fake = Faker()
 if __name__ == "__main__":
     with app.app_context():
         User.query.delete()
-        Coffee.query.delete()
-        Review.query.delete()
-
+        Plant.query.delete()
+        
         users = []
         usernames = ["Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ivy", "Jack"]
         for username in usernames:
@@ -23,55 +22,23 @@ if __name__ == "__main__":
         db.session.add_all(users)
         db.session.commit()
 
-        coffees = []
-        coffee_data = [
-            {"name": "Espresso", "image_url": "https://www.acouplecooks.com/wp-content/uploads/2020/09/Latte-Art-066s.jpg"},
-            {"name": "Latte", "image_url": "https://sprudge.com/wp-content/uploads/2016/04/Sprudge-ObjetoEncontrado-JulianaGanan-Sprudge-ObjetoEncontrado-JulianaGanan-BSB_Coffee_Shops_Guide_objeto_latte_art_Lucas_Hamu_01.jpg"},
-            {"name": "Cappuccino", "image_url": "https://dairyfarmersofcanada.ca/sites/default/files/styles/recipe_image/public/image_file_browser/conso_recipe/2021/Italian%20Cappuccino.jpg.jpeg?itok=0WxeK4V7"},
-            {"name": "Americano", "image_url": "https://www.cleaneatingkitchen.com/wp-content/uploads/2022/07/espresso-americano-over-ice-with-straw.jpg"},
-            {"name": "Mocha", "image_url": "https://athome.starbucks.com/sites/default/files/2021-06/1_CAH_CaffeMocha_Hdr_2880x16602.jpg"},
-            {"name": "Macchiato", "image_url": "https://fandbrecipes.com/wp-content/uploads/2022/07/Espresso-Macchiato_Step-By-Step-Recipe.png"},
-            {"name": "Irish Coffee", "image_url": "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2020/02/Irish-Coffee-3.jpg"},
-            {"name": "Affogato", "image_url": "https://www.siftandsimmer.com/wp-content/uploads/2021/11/affogato2.jpg"},
-            {"name": "Flat White", "image_url": "https://images.immediate.co.uk/production/volatile/sites/2/2021/11/Flat-White-d195a5f.png?quality=90&resize=556,505"},
-            {"name": "Turkish Coffee", "image_url": "https://foolproofliving.com/wp-content/uploads/2019/03/Turkish-Coffee-Recipe-600x600.jpg"}
-            
+        plants = []
+        plant_data = [
+            {"name": "Spider Plant", "image": "https://www.bhg.com/thmb/oDnjlrHprd67aYvinrMfQgVUPtQ=/5332x0/filters:no_upscale():strip_icc()/BHG-spider-plant-c0e0fdd5ec6e4c1588998ce3167f6579.jpg", "price": 15.99},
+            {"name": "Snake Plant","image": "https://d3gkbidvk2xej.cloudfront.net/images/products/77a60682-9128-4980-bdf6-a0ee46c97e71/s/snake-plant-laurentii-white-mid-century-ceramic.jpeg?version=1654866934.25190019800","price": 25.98},
+            {"name": "Pothos","image": "https://fleuressence.ca/cdn/shop/files/Pothos-Golden-Fleuressence-313.jpg?v=1685453762","price": 5.99},
+            {"name": "Peace Lily","image": "https://www.mydomaine.com/thmb/N3StDx3PyGbF0Pwafv-P9-qiNZU=/900x0/filters:no_upscale():strip_icc()/1566417254329_20190821-1566417255317-b9314f1d9f7a4668a466c5ffb1913a8f.jpg","price": 12.11},
+            {"name": "ZZ Plant","image": "https://assets.weimgs.com/weimgs/rk/images/wcm/products/202343/0098/faux-potted-zz-plant-o.jpg","price": 10.37},
+            {"name": "Fiddle Leaf Fig","image": "https://d3gkbidvk2xej.cloudfront.net/images/products/bb6076fa-2dbc-42cc-a9f0-e5cf30aef024/s/fiddle-leaf-fig-bush-white-mid-century-ceramic-black-wood-stand.jpeg?version=1656084975.30690019800","price": 25.99},
+            {"name": "Rubber Plant","image": "https://abeautifulmess.com/wp-content/uploads/2023/06/rubbertree-1.jpg","price": 55},
+            {"name": "Aloe Vera","image": "https://lagreentouch.fr/cdn/shop/articles/quel-entretien-pour-un-aloe-vera-875968.jpg?crop=center&height=1200&v=1693387378&width=1200","price": 12},
+            {"name": "Chinese Evergreen","image": "https://www.gardendesign.com/pictures/images/900x705Max/site_3/chinese-evergreen-plant-aglaonema-shutterstock-com_15962.jpg","price": 19},
+            {"name": "Boston Fern","image": "https://s7d1.scene7.com/is/image/terrain/58122755_000_a?$zoom2$","price": 50}
         ]
-        for coffee_info in coffee_data:
-            coffee = Coffee(name=coffee_info["name"], image_url=coffee_info["image_url"])
-            coffees.append(coffee)
+        for plant_info in plant_data:
+            plant = Plant(name=plant_info["name"], image=plant_info["image"], price=plant_info["price"])
+            plants.append(plant)
         
-        db.session.add_all(coffees)
+        db.session.add_all(plants)
         db.session.commit()
-
-        
-
-        
-
-        reviews = []
-        reviews_data = [
-            {"text": "Great coffee!", "rating": 5},
-            {"text": "Love!", "rating": 4},
-            {"text": "Not so good.", "rating": 2},
-            {"text": "Average coffee.", "rating": 3},
-            {"text": "Could be better.", "rating": 2},
-            {"text": "Amazing coffee!", "rating": 5},
-            {"text": "Terrible.", "rating": 1},
-            {"text": "Delicious coffee.", "rating": 4},
-            {"text": "Perfect espresso.", "rating": 5},
-            {"text": "Decent cappuccino.", "rating": 3},
-        ]
-
-        for data in reviews_data:
-            review = Review(
-                text=data["text"],
-                rating=data["rating"],
-                user_id=choice(users).id,
-                coffee_id=choice(coffees).id,
-            )
-            reviews.append(review)
-        
-        db.session.add_all(reviews)
-        db.session.commit()
-
 
