@@ -29,3 +29,4 @@ function PlantList({ plants, setCart, addToCart, currentUser}) {
 }
 
 export default PlantList;
+

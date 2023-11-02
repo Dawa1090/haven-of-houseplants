@@ -59,6 +59,42 @@ def logout():
     session.pop("user_id")
     return {"message": "Logged out"}, 200
 
+# # STAFF
+# @app.route("/staff/register", methods=["POST"])
+# def staff_register():
+#     data = request.json
+#     username = data.get("username")
+#     password = data.get("password")
+
+#     # Check if a staff member with the same username already exists
+#     existing_staff = Staff.query.filter_by(username=username).first()
+
+#     if existing_staff:
+#         return jsonify({"error": "Username already taken"}), 400
+
+#     staff = Staff(username=username, password=password)
+#     db.session.add(staff)
+#     db.session.commit()
+
+#     return jsonify({"message": "Staff registered successfully"}), 201
+
+# @app.route("/staff/login", methods=["POST"])
+# def staff_login():
+#     data = request.json
+#     username = data.get("username")
+#     password = data.get("password")
+
+#     staff = Staff.query.filter_by(username=username).first()
+
+#     if staff and bcrypt.check_password_hash(staff.password, password):
+#         # Successful login
+#         # You can set a session variable here to mark the user as logged in
+#         return jsonify({"message": "Staff login successful"}), 200
+#     else:
+#         return jsonify({"error": "Invalid username or password"}), 401
+
+
+
 # PLANT
 
 @app.route("/plants", methods=["GET"])

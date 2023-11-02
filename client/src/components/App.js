@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../pages/Home";
-import Header from "./Header";
 import PlantPage from "./PlantPage";
 import PlantList from "./PlantList";
 import ShoppingCart from "./ShoppingCart";
@@ -154,8 +153,8 @@ function App() {
             />
           </Route>
           <Route path="/plants" exact>
-            {/* <PlantList plants={plants} cart={cart} addToCart={addToCart} /> */}
-            {isLoggedIn && (
+            
+            {isLoggedIn ? (
         <PlantPage
           plants={filterPlants}
           onAddPlant={onAddPlant}
@@ -166,19 +165,19 @@ function App() {
           removeFromCart={removeFromCart}
           currentUser={currentUser}
         />
-      )}
+      ): <PlantList plants={plants}  addToCart={addToCart} currentUser={currentUser}/>}
           </Route>
           <Route path="/cart" exact>
             <ShoppingCart
-              cart={cart} // Add your cart data
-              removeFromCart={removeFromCart} // Add your removeFromCart function
-              checkout={checkout} // Add your checkout function
+              cart={cart} 
+              removeFromCart={removeFromCart} 
+              checkout={checkout} 
             />
           </Route>
         </Switch>
       </Router>
 
-      {isLoggedIn && <Header />}
+      {isLoggedIn}
 
 
     </div>
