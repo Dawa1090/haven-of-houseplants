@@ -3,15 +3,19 @@ from app import app
 from models import db  
 from faker import Faker
 from random import randint, choice, choices
-from models import User, Plant
+from models import User, Plant, Staff
+from flask_bcrypt import Bcrypt
 import string
 
 fake = Faker()
-
+bcrypt = Bcrypt(app)
 if __name__ == "__main__":
     with app.app_context():
+       
+
         User.query.delete()
         Plant.query.delete()
+        Staff.query.delete()
         
         users = []
         usernames = ["Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Hannah", "Ivy", "Jack"]
@@ -41,4 +45,14 @@ if __name__ == "__main__":
         
         db.session.add_all(plants)
         db.session.commit()
+
+        staffs = []
+        staffnames = ["Staff1"]
+        for staffname in staffnames:
+            staff = Staff(staffname="staff", password=bcrypt.generate_password_hash('p').decode('utf-8'))  # Use staffname from the loop variable
+            staffs.append(staff)
+
+        db.session.add_all(staffs)
+        db.session.commit()
+
 

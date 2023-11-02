@@ -5,6 +5,9 @@ import PlantPage from "./PlantPage";
 import PlantList from "./PlantList";
 import ShoppingCart from "./ShoppingCart";
 import Navbar from "./Navbar";
+import StaffComponent from "./StaffComponent";
+import StaffPage from "./StaffPage";
+
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -46,6 +49,29 @@ function App() {
         window.alert(error.message);
       });
   }
+
+  function attemptStaffLogin(staffInfo) {
+    fetch("/staff/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json",
+      },
+      body: JSON.stringify(staffInfo),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        } else if (res.status === 401) {
+          throw new Error("Invalid username or password");
+        }
+      })
+      .then((data) => {
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
   
 
   function logout() {
@@ -63,6 +89,7 @@ function App() {
         }
     });
 }, []);
+
 
   const [plants, setPlants] = useState([]);
   const [query, setQuery] = useState("");
@@ -152,6 +179,11 @@ function App() {
               setCurrentUser={setCurrentUser}
             />
           </Route>
+            <Route path="/staff" exact>
+              <StaffComponent
+                attemptStaffLogin={attemptStaffLogin}
+              />
+            </Route>
           <Route path="/plants" exact>
             
             {isLoggedIn ? (
@@ -171,6 +203,7 @@ function App() {
             <ShoppingCart
               cart={cart} 
               removeFromCart={removeFromCart} 
+              isLoggedIn={isLoggedIn} 
               checkout={checkout} 
             />
           </Route>

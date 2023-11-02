@@ -5,10 +5,12 @@ import Search from "./Search";
 
 
 
-function PlantPage({plants, onAddPlant, query, onUpdateQuery, cart, removeFromCart, checkout, addToCart, currentUser}){
+function PlantPage({plants, onAddPlant, query, onUpdateQuery, cart, removeFromCart, checkout, addToCart, currentUser, User, userRole}){
   return (
     <main>
+      {User && userRole === "staff" && (
       <NewPlantForm onAddPlant={onAddPlant}/>
+      )}
       <Search query={query} onUpdateQuery={onUpdateQuery}/>
       <PlantList plants={plants} cart={cart} removeFromCart={removeFromCart} checkout={checkout} addToCart={addToCart} currentUser={currentUser}/>
     </main>

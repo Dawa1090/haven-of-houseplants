@@ -2,7 +2,7 @@ from flask import Flask, make_response, jsonify, request, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
-from models import db, User, Plant
+from models import db, User, Plant, Staff
 from flask_cors import CORS
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
@@ -59,40 +59,48 @@ def logout():
     session.pop("user_id")
     return {"message": "Logged out"}, 200
 
-# # STAFF
-# @app.route("/staff/register", methods=["POST"])
-# def staff_register():
-#     data = request.json
-#     username = data.get("username")
-#     password = data.get("password")
+# STAFF
+@app.route("/staff", methods=["GET"])
+def staff_route():
+    user_role = session.get("user_role")
+    if user_role == "staff":
+        # Allow staff to access this route
+        return {"message": "Welcome, staff!"}, 200
+    else:
+        return {"error": "Access denied"}, 403 
 
-#     # Check if a staff member with the same username already exists
-#     existing_staff = Staff.query.filter_by(username=username).first()
+@app.route("/staff/register", methods=["POST"])
+def staff_register():
+    data = request.json
+    username = data.get("username")
+    password = data.get("password")
 
-#     if existing_staff:
-#         return jsonify({"error": "Username already taken"}), 400
+    # Check if a staff member with the same username already exists
+    existing_staff = Staff.query.filter_by(username=username).first()
 
-#     staff = Staff(username=username, password=password)
-#     db.session.add(staff)
-#     db.session.commit()
+    if existing_staff:
+        return jsonify({"error": "Username already taken"}), 400
 
-#     return jsonify({"message": "Staff registered successfully"}), 201
+    staff = Staff(username=username, password=password)
+    db.session.add(staff)
+    db.session.commit()
 
-# @app.route("/staff/login", methods=["POST"])
-# def staff_login():
-#     data = request.json
-#     username = data.get("username")
-#     password = data.get("password")
+    return jsonify({"message": "Staff registered successfully"}), 201
 
-#     staff = Staff.query.filter_by(username=username).first()
+@app.route("/staff/login", methods=["POST"])
+def staff_login():
+    data = request.json
+    staffname = data.get("username")
+    password = data.get("password")
 
-#     if staff and bcrypt.check_password_hash(staff.password, password):
-#         # Successful login
-#         # You can set a session variable here to mark the user as logged in
-#         return jsonify({"message": "Staff login successful"}), 200
-#     else:
-#         return jsonify({"error": "Invalid username or password"}), 401
+    staff = Staff.query.filter_by(username=staffname).first()
 
+    if staff and bcrypt.check_password_hash(staff.password, password):
+       # Successful login for staff
+        # You can set a session variable here to mark the staff as logged in
+        return jsonify({"message": "Staff login successful"}), 200
+    else:
+        return jsonify({"error": "Invalid username or password"}, 401)
 
 
 # PLANT
