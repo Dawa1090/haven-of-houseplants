@@ -1,9 +1,8 @@
 
 from app import app
-from models import db  
 from faker import Faker
 from random import randint, choice, choices
-from models import User, Plant, Staff
+from models import db, User, Plant, Staff
 from flask_bcrypt import Bcrypt
 import string
 
@@ -46,13 +45,34 @@ if __name__ == "__main__":
         db.session.add_all(plants)
         db.session.commit()
 
-        staffs = []
-        staffnames = ["Staff1"]
-        for staffname in staffnames:
-            staff = Staff(staffname="staff", password=bcrypt.generate_password_hash('p').decode('utf-8'))  # Use staffname from the loop variable
-            staffs.append(staff)
+        # staffs = []
+        # staffnames = ["Staff1"]
+        # # for staffname in staffnames:
+        # #     staff = Staff(staffname="staff", password=bcrypt.generate_password_hash('p').decode('utf-8'))  # Use staffname from the loop variable
+        # #     staffs.append(staff)
 
-        db.session.add_all(staffs)
-        db.session.commit()
+        # # db.session.add_all(staffs)
+        # # db.session.commit()
+        
+
+        staffs = [{"staffname": "Staff1"}]  # List with a single staff member
+
+        for staff_data in staffs:
+
+            staffname = "staff"
+            password = "p"
+            
+            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')  # Hash the password
+
+            # Create a Staff instance with the staffname and hashed password
+            staff = Staff(staffname=staffname, password=hashed_password)
+
+            # Add the staff member to the database and commit the changes
+            db.session.add(staff)
+            db.session.commit()
+
+
+
+
 
 

@@ -1,17 +1,20 @@
 
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'
 
-function StaffLogin({ attemptLogin }) {
-    const [username, setUsername] = useState("");
+function StaffLogin({ attemptStaffLogin }) {
+    const [staffname, setStaffname] = useState("");
     const [password, setPassword] = useState("");
-  
-    const handleChangeUsername = (e) => setUsername(e.target.value);
+    const history = useHistory()
+
+    const handleChangeUsername = (e) => setStaffname(e.target.value);
     const handleChangePassword = (e) => setPassword(e.target.value);
   
     function handleSubmit(e) {
       e.preventDefault();
       // Send a request to the Flask back end with the "staff" role
-      attemptLogin({ username, password, role: "staff" });
+      attemptStaffLogin({ staffname, password, role: "staff" });
+      history.push("/staff");
     }
   
     return (
@@ -21,8 +24,8 @@ function StaffLogin({ attemptLogin }) {
           type="text"
           className="login-input"
           onChange={handleChangeUsername}
-          value={username}
-          placeholder="Username"
+          value={staffname}
+          placeholder="staff name"
         />
         <input
           type="password"

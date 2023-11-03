@@ -1,12 +1,8 @@
 
 import React, { useState, useEffect } from "react";
 
-function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn }) {
-  const [plants, setPlants] = useState([
-    { id: 1, name: "Plant 1", price: 12 },
-    { id: 2, name: "Plant 2", price: 8 },
-    { id: 3, name: "Plant 3", price: 5 },
-  ]);
+function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, selectedRole }) {
+  const [plants, setPlants] = useState([]);
 
   const [cartItems, setCartItems] = useState([]);
   const [promoCode, setPromoCode] = useState("");
@@ -31,7 +27,11 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn }) {
 
   const handleCheckout = () => {
     if (isLoggedIn) {
-      checkout();
+      if (selectedRole === "customer") {
+        checkout();
+      } else {
+        alert("Shopping cart is only available for customers.");
+      }
     } else {
       alert("Please log in to shop.");
     }
@@ -51,6 +51,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn }) {
 
   return (
     <div className="container">
+    {selectedRole === "customer" ?(
       <main>
         <ul className="list-group mb-3">
           {plants.map((plant) => (
@@ -73,6 +74,15 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn }) {
           </li>
         </ul>
       </main>
+    ) : (
+      <div>
+          <p>You must be a customer to access the shopping cart.</p>
+          {/* Render something else or nothing */}
+        </div>
+    )}
+
+
+
       <div className="col-md-5 col-lg-4 order-md-last">
         <h4 className="d-flex justify-content-between align-items-center mb-3">
           <span className="text-primary">Your cart</span>

@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "../pages/Home";
 import PlantPage from "./PlantPage";
 import PlantList from "./PlantList";
 import ShoppingCart from "./ShoppingCart";
 import Navbar from "./Navbar";
-import StaffComponent from "./StaffComponent";
-import StaffPage from "./StaffPage";
+import StaffPage from "./StaffPage"; 
 
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [currentStaff, setCurrentStaff] = useState({})
+  const [selectedRole, setSelectedRole] = useState("customer");
+  
+  
+
 
   function attemptSignup(userInfo) {
     fetch("/users", {
@@ -50,31 +54,44 @@ function App() {
       });
   }
 
-  function attemptStaffLogin(staffInfo) {
+  function attemptStaffLogin(staffInfo) {  
+    console.log(staffInfo)
     fetch("/staff/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accepts: "application/json",
+        "Accept": "application/json",
       },
       body: JSON.stringify(staffInfo),
+      
     })
       .then((res) => {
         if (res.status === 200) {
           return res.json();
         } else if (res.status === 401) {
-          throw new Error("Invalid username or password");
+          throw new Error("Invalid staffname or password");
         }
       })
       .then((data) => {
+        console.log(data);setCurrentStaff(data)
       })
       .catch((error) => {
         window.alert(error.message);
       });
+
+
   }
   
 
   function logout() {
+    fetch("/logout", { method: "DELETE" }).then((res) => {
+      if (res.ok) {
+        setCurrentUser(null);
+      }
+    });
+  }
+
+  function logoutStaff() {
     fetch("/logout", { method: "DELETE" }).then((res) => {
       if (res.ok) {
         setCurrentUser(null);
@@ -89,6 +106,16 @@ function App() {
         }
     });
 }, []);
+
+useEffect(() => {
+  fetch("/check_staff_session").then((res) => {
+      if (res.ok) {
+          res.json().then((staff) => setCurrentStaff(staff));
+      }
+  });
+}, []);
+
+
 
 
   const [plants, setPlants] = useState([]);
@@ -149,7 +176,7 @@ function App() {
 
   const [cart, setCart] = useState([]);
 
-  //do something with quantity
+  //!!!do something with quantity
   const addToCart = (plant, quantity) => {
     const updatedCart = [...cart, plant];
   setCart(updatedCart);
@@ -177,13 +204,16 @@ function App() {
               attemptSignup={attemptSignup}
               logout={logout}
               setCurrentUser={setCurrentUser}
+              attemptStaffLogin={attemptStaffLogin}
+              selectedRole={selectedRole}
+              setSelectedRole={setSelectedRole}
             />
           </Route>
             <Route path="/staff" exact>
-              <StaffComponent
-                attemptStaffLogin={attemptStaffLogin}
-              />
-            </Route>
+              <StaffPage setSelectedRole={setSelectedRole} onAddPlant={onAddPlant} currentStaff={currentStaff} logoutStaff={logoutStaff}/>
+          </Route>
+
+
           <Route path="/plants" exact>
             
             {isLoggedIn ? (
@@ -195,7 +225,10 @@ function App() {
           cart={cart}
           addToCart={addToCart}
           removeFromCart={removeFromCart}
+          checkout={checkout}
           currentUser={currentUser}
+          selectedRole={selectedRole}
+          
         />
       ): <PlantList plants={plants}  addToCart={addToCart} currentUser={currentUser}/>}
           </Route>
@@ -205,7 +238,9 @@ function App() {
               removeFromCart={removeFromCart} 
               isLoggedIn={isLoggedIn} 
               checkout={checkout} 
+              selectedRole={selectedRole}
             />
+
           </Route>
         </Switch>
       </Router>

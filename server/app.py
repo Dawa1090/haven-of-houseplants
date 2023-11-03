@@ -9,7 +9,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-app.secret_key = 'DAWA'
+app.secret_key = 'DAWA_SHERPA_SECRET_KEY'
 
 db.init_app(app)
 bcrypt = Bcrypt(app)
@@ -47,60 +47,98 @@ def login():
         return {"error": "Invalid username or password"}, 401
 
 @app.route("/check_session", methods=["GET"])
-def check_session():
+def check_user_session():
     user = User.query.filter(User.id == session.get("user_id")).first()
     if user:
         return user.to_dict(), 200
     else:
         return {"message": "No user logged in"}, 401
 
+# @app.route("/logout", methods=["DELETE"])
+# def logout():
+#     session.pop("user_id")
+#     return {"message": "Logged out"}, 200
+
 @app.route("/logout", methods=["DELETE"])
 def logout():
-    session.pop("user_id")
-    return {"message": "Logged out"}, 200
+    messages = []
+    
+    if "user_id" in session:
+        session.pop("user_id")
+        messages.append("User logged out")
+    
+    if "staff_id" in session:
+        session.pop("staff_id")
+        messages.append("Staff logged out")
+    
+    if messages:
+        return {"message": ", ".join(messages)}, 200
+    else:
+        return {"message": "No session to log out"}, 200
+    
 
 # STAFF
-@app.route("/staff", methods=["GET"])
-def staff_route():
-    user_role = session.get("user_role")
-    if user_role == "staff":
-        # Allow staff to access this route
-        return {"message": "Welcome, staff!"}, 200
-    else:
-        return {"error": "Access denied"}, 403 
+# @app.route("/staff", methods=["GET"])
+# def staff_route():
+#     user_role = session.get("staff_id")
+#     if user_role == "staff":
+#         # Allow staff to access this route
+#         return {"message": "Welcome, staff!"}, 200
+#     else:
+#         return {"error": "Access denied"}, 403 
 
-@app.route("/staff/register", methods=["POST"])
-def staff_register():
-    data = request.json
-    username = data.get("username")
-    password = data.get("password")
+# @app.route("/staff/register", methods=["POST"])
+# def staff_register():
+#     data = request.json
+#     username = data.get("username")
+#     password = data.get("password")
 
-    # Check if a staff member with the same username already exists
-    existing_staff = Staff.query.filter_by(username=username).first()
+#     # Check if a staff member with the same username already exists
+#     existing_staff = Staff.query.filter_by(username=username).first()
 
-    if existing_staff:
-        return jsonify({"error": "Username already taken"}), 400
+#     if existing_staff:
+#         return jsonify({"error": "Username already taken"}), 400
 
-    staff = Staff(username=username, password=password)
-    db.session.add(staff)
-    db.session.commit()
+#     staff = Staff(username=username, password=password)
+#     db.session.add(staff)
+#     db.session.commit()
 
-    return jsonify({"message": "Staff registered successfully"}), 201
+#     return jsonify({"message": "Staff registered successfully"}), 201
+
+
 
 @app.route("/staff/login", methods=["POST"])
 def staff_login():
     data = request.json
-    staffname = data.get("username")
+    print("debug")
+    print(data)
+
+    staffname = data.get("staffname")
     password = data.get("password")
 
-    staff = Staff.query.filter_by(username=staffname).first()
+    staff = Staff.query.filter_by(staffname=staffname).first()
 
     if staff and bcrypt.check_password_hash(staff.password, password):
-       # Successful login for staff
-        # You can set a session variable here to mark the staff as logged in
-        return jsonify({"message": "Staff login successful"}), 200
+        session["staff_id"] = staff.id
+        return staff.to_dict(), 200
     else:
-        return jsonify({"error": "Invalid username or password"}, 401)
+        return {"error": "Invalid staffname or password"}, 401
+    
+@app.route("/check_staff_session", methods=["GET"])
+def check_staff_session():
+    staff = Staff.query.filter(Staff.id == session.get("staff_id")).first()
+    if staff:
+        return staff.to_dict(), 200
+    else:
+        return {"message": "No user logged in"}, 401
+
+
+# @app.route("/staff/logout", methods=["DELETE"])
+# def logout():
+#     session.pop("staff_id")
+#     return {"message": "Logged out"}, 200
+    
+
 
 
 # PLANT
@@ -115,7 +153,7 @@ def get_plants():
 def get_plant_by_id(id: int):
     plant = Plant.query.filter(Plant.id == id).first()
     if not plant:
-        return make_response(jsonify({"error": "Coffee not found"}), 404)
+        return make_response(jsonify({"error": "Plant not found"}), 404)
     return make_response(jsonify(plant.to_dict()), 200)
 
 @app.route("/plants", methods=["POST"])

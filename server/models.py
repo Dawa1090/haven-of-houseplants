@@ -33,6 +33,7 @@ class Staff(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     staffname = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
+    role = db.Column(db.String, default="staff") 
 
     # def __init__(self, staffname, password):
     #     self.staffname = staffname

@@ -5,17 +5,22 @@ import Search from "./Search";
 
 
 
-function PlantPage({plants, onAddPlant, query, onUpdateQuery, cart, removeFromCart, checkout, addToCart, currentUser, User, userRole}){
+function PlantPage({ plants, onAddPlant, query, onUpdateQuery, cart, removeFromCart, checkout, addToCart, currentUser }) {
   return (
     <main>
-      {User && userRole === "staff" && (
-      <NewPlantForm onAddPlant={onAddPlant}/>
+      {currentUser && (
+        <>
+          {currentUser.role === "staff" && (
+            <NewPlantForm onAddPlant={onAddPlant} />
+          )}
+        </>
       )}
-      <Search query={query} onUpdateQuery={onUpdateQuery}/>
-      <PlantList plants={plants} cart={cart} removeFromCart={removeFromCart} checkout={checkout} addToCart={addToCart} currentUser={currentUser}/>
+      <Search query={query} onUpdateQuery={onUpdateQuery} />
+      <PlantList plants={plants} cart={cart} removeFromCart={removeFromCart} checkout={checkout} addToCart={addToCart} currentUser={currentUser} />
     </main>
   );
 }
+
 
 export default PlantPage;
 
