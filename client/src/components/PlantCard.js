@@ -6,6 +6,7 @@ function PlantCard({ plant, addToCart, currentUser }) {
   const [quantity, setQuantity] = useState(1);
   console.log(currentUser)
   const handleAddToCartClick = () => {
+
     if (quantity > 0) {
       // Call the addToCart function with the plant's data and the specified quantity
       addToCart(plant, quantity);

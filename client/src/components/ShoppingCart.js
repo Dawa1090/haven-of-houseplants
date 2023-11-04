@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 
 function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, selectedRole }) {
   const [plants, setPlants] = useState([]);
+  
+
 
   const [cartItems, setCartItems] = useState([]);
   const [promoCode, setPromoCode] = useState("");
@@ -19,23 +21,14 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
     setCartItems([...cartItems, plant]);
   };
 
+
   const calculateTotal = () => {
     const itemsTotal = cartItems.reduce((total, item) => total + item.price, 0);
     const promoDiscount = promoCode === "EXAMPLECODE" ? 5 : 0;
     return itemsTotal - promoDiscount;
   };
 
-  const handleCheckout = () => {
-    if (isLoggedIn) {
-      if (selectedRole === "customer") {
-        checkout();
-      } else {
-        alert("Shopping cart is only available for customers.");
-      }
-    } else {
-      alert("Please log in to shop.");
-    }
-  };
+
 
   const handleBillingAddressChange = (e) => {
     const { name, value } = e.target;
@@ -51,6 +44,16 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
 
   return (
     <div className="container">
+      {cart.map(item => (
+      <div key={item.id}>
+        <h3>{item.name}</h3>
+        <p>Price: ${item.price}</p>
+        <p>Quantity: {item.quantity}</p>
+      </div>
+    ))}
+
+
+    
     {selectedRole === "customer" ?(
       <main>
         <ul className="list-group mb-3">

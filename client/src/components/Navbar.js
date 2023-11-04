@@ -14,7 +14,7 @@ function Navbar({ currentUser }) {
                 ) : (
                     <span className='disabled-link'>Plants</span>
                 )} */}
-        <Link className='Cart' to='/cart'>Shopping Cart</Link>
+        {currentUser && <Link className='Cart' to='/cart'>Shopping Cart</Link>}
       </div>
     </div>
   );

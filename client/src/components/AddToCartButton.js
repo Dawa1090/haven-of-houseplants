@@ -24,6 +24,7 @@ function AddToCartButton({ plant, addToCart }) {
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = () => {
+    console.log('hiii')
     // Convert quantity to a number (it's currently a string)
     const quantityNumber = parseInt(quantity, 10);
 

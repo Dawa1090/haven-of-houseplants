@@ -9,6 +9,7 @@ function ParentComponent() {
   ];
 
   const addToCart = (plant) => {
+    console.log('heellloo from from the cart')
     setCart([...cart, plant]);
   };
 

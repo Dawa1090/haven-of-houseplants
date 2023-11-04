@@ -9,7 +9,7 @@ import StaffPage from "./StaffPage";
 
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   const [currentStaff, setCurrentStaff] = useState({})
   const [selectedRole, setSelectedRole] = useState("customer");
   
@@ -173,12 +173,13 @@ useEffect(() => {
   
 
   const isLoggedIn = currentUser && Object.keys(currentUser).length > 0;
-
+console.log()
   const [cart, setCart] = useState([]);
 
   //!!!do something with quantity
   const addToCart = (plant, quantity) => {
     const updatedCart = [...cart, plant];
+
   setCart(updatedCart);
   };
 
@@ -233,13 +234,13 @@ useEffect(() => {
       ): <PlantList plants={plants}  addToCart={addToCart} currentUser={currentUser}/>}
           </Route>
           <Route path="/cart" exact>
-            <ShoppingCart
+            {currentUser && <ShoppingCart
               cart={cart} 
               removeFromCart={removeFromCart} 
               isLoggedIn={isLoggedIn} 
               checkout={checkout} 
               selectedRole={selectedRole}
-            />
+            />}
 
           </Route>
         </Switch>

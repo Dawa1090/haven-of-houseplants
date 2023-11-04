@@ -9,6 +9,8 @@ import StaffDetails from "./StaffDetails";
 
 function Home({ currentUser, attemptLogin, attemptSignup, logout, attemptStaffLogin, selectedRole, setSelectedRole }) {
 
+
+
     useEffect(() => {
         if (currentUser && currentUser.username) {
             // You can display a message or redirect the user to a different page
