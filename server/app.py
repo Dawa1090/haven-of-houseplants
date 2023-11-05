@@ -133,8 +133,8 @@ def check_staff_session():
         return {"message": "No user logged in"}, 401
 
 
-# @app.route("/staff/logout", methods=["DELETE"])
-# def logout():
+#@app.route("/staff/logout", methods=["DELETE"])
+#def logout():
 #     session.pop("staff_id")
 #     return {"message": "Logged out"}, 200
     

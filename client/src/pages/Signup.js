@@ -53,24 +53,26 @@ function Signup({ attemptSignup }) {
   }
 
   return (
+
     <form className="signup-form" onSubmit={handleSubmit}>
+      <div className="input-group mb-3">
       <h2 className="signup-title">Signup</h2>
-      <input
-        type="text"
-        className="signup-input"
-        onChange={handleChangeUsername}
-        value={username}
-        placeholder="Username"
-      />
-      <input
-        type="password"
-        className="signup-input"
-        onChange={handleChangePassword}
-        value={password}
-        placeholder="Password"
-      />
-      <input type="submit" className="signup-button" value="Signup" />
+
+        <div className="input-group mb-3">
+          <input type="text" className="form-control" placeholder="Username" aria-label="Username" onChange={handleChangeUsername}
+            value={username} />
+          <span className="input-group-text">::</span>
+          <input className="form-control" placeholder="Password" aria-label="Password" type="password" onChange={handleChangePassword}
+            value={password} />
+          <button className="btn btn-outline-secondary" type="submit">Sign Up</button>
+        </div>
+      </div>
     </form>
+    
+
+    
+
+  
   );
 }
 

@@ -14,28 +14,26 @@ function StaffLogin({ attemptStaffLogin }) {
       e.preventDefault();
       // Send a request to the Flask back end with the "staff" role
       attemptStaffLogin({ staffname, password, role: "staff" });
-      history.push("/staff");
+      //history.push("/staff");
     }
   
     return (
+
       <form className="login-form" onSubmit={handleSubmit}>
+      <div className="input-group mb-3">
         <h2 className="login-title">Staff Login</h2>
-        <input
-          type="text"
-          className="login-input"
-          onChange={handleChangeUsername}
-          value={staffname}
-          placeholder="staff name"
-        />
-        <input
-          type="password"
-          className="login-input"
-          onChange={handleChangePassword}
-          value={password}
-          placeholder="Password"
-        />
-        <input type="submit" className="login-button" value="Login as Staff" />
-      </form>
+
+        <div className="input-group mb-3">
+          <input type="text" className="form-control" placeholder="Username" aria-label="Username" onChange={handleChangeUsername}
+            value={staffname} />
+          <span className="input-group-text">::</span>
+          <input className="form-control" placeholder="Password" aria-label="Password" type="password" onChange={handleChangePassword}
+            value={password} />
+          <button className="btn btn-outline-secondary" type="submit">Login as Staff</button>
+        </div>
+      </div>
+    </form>
+
     );
   }
   

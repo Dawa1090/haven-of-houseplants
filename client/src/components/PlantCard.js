@@ -4,7 +4,7 @@ import "./PlantCard.css";
 function PlantCard({ plant, addToCart, currentUser }) {
   const [stock, setStock] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  console.log(currentUser)
+  //console.log(currentUser)
   const handleAddToCartClick = () => {
 
     if (quantity > 0) {

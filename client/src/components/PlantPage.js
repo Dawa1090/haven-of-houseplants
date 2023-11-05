@@ -5,17 +5,20 @@ import Search from "./Search";
 
 
 
-function PlantPage({ plants, onAddPlant, query, onUpdateQuery, cart, removeFromCart, checkout, addToCart, currentUser }) {
+function PlantPage({ plants, onAddPlant, query, onUpdateQuery, cart, removeFromCart, checkout, addToCart, currentUser, selectedRole, isLoggedIn, isStaffLoggedIn }) {
+
+  console.log(selectedRole)
   return (
     <main>
-      {currentUser && (
+      {selectedRole === "staff" ?
         <>
-          {currentUser.role === "staff" && (
+          {selectedRole === "staff" && (
             <NewPlantForm onAddPlant={onAddPlant} />
           )}
-        </>
-      )}
-      <Search query={query} onUpdateQuery={onUpdateQuery} />
+        </> : ""
+      }
+      {isLoggedIn || isStaffLoggedIn ?
+        (<Search query={query} onUpdateQuery={onUpdateQuery} />) : ""}
       <PlantList plants={plants} cart={cart} removeFromCart={removeFromCart} checkout={checkout} addToCart={addToCart} currentUser={currentUser} />
     </main>
   );
