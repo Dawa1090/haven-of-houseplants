@@ -15,8 +15,6 @@ function PlantPage({ plants, onAddPlant, query, onUpdateQuery, cart, removeFromC
             <NewPlantForm onAddPlant={onAddPlant} />
         </> : ""
       }
-      {isLoggedIn || isStaffLoggedIn ?
-        (<Search query={query} onUpdateQuery={onUpdateQuery} />) : ""}
       <PlantList plants={plants} cart={cart} removeFromCart={removeFromCart} checkout={checkout} addToCart={addToCart} currentUser={currentUser} deletePlant={deletePlant} currentStaff={currentStaff} isStaffLoggedIn={isStaffLoggedIn} />
     </main>
   );
