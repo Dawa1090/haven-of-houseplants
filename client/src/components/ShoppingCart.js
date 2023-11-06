@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 
-function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, selectedRole }) {
+function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, selectedRole, deleteItem}) {
   const [plants, setPlants] = useState([]);
 
 
@@ -18,11 +18,10 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
   });
 
 
-
   const calculateTotal = () => {
-    console.log("cartItems: ", cartItems)
-    const totalQuantity = cartItems.reduce((total, item) => total + (+item.quantity), 0);
-    const itemsTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    console.log("cartItems: ", cart)
+    const totalQuantity = cart.reduce((total, item) => total + (+item.quantity), 0);
+    const itemsTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
     const promoDiscount = promoCode === "EXAMPLECODE" ? 5 : 0;
     return { totalQuantity, totalAmount: itemsTotal - promoDiscount };
   };
@@ -54,6 +53,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
               <div className="text-success">
                 <h6 className="my-0">Promo code</h6>
                 <small>EXAMPLECODE</small>
+                <i className="bi bi-trash3"></i>
               </div>
               <span className="text-success">−$5</span>
             </li>
@@ -76,13 +76,14 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
           </span>
         </h4>
         <ul className="list-group mb-3">
-          {cartItems.map((item) => (
-            <li key={item.id} className="list-group-item d-flex justify-content-between lh-sm">
+          {cart.map((item) => (
+            <li key={item.id} className="list-group-item d-flex justify-content-between lh-sm cartItems">
               <div>
                 <h6 className="my-0">{item.name}</h6>
               </div>
               <span className="text-body-secondary">{item.quantity}</span>
               <span className="text-body-secondary">${item.price}</span>
+              <button onClick={() => removeFromCart(item.id)} className="btn btn-default"><i className="bi bi-trash"></i></button>
             </li>
           ))}
           <li className="list-group-item d-flex justify-content-between">

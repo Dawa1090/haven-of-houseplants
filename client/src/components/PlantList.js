@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PlantCard from "./PlantCard";
 
-function PlantList({ plants, setCart, addToCart, currentUser}) {
+function PlantList({ plants, setCart, addToCart, currentUser, selectedRole, deletePlant, currentStaff, isStaffLoggedIn }) {
   const [quantities, setQuantities] = useState({});
 
   const handleQuantityChange = (plantId, quantity) => {
@@ -12,18 +12,24 @@ function PlantList({ plants, setCart, addToCart, currentUser}) {
   };
 
   return (
-    <div className="plant-container">
-      {plants.map((plant) => (
-        <PlantCard
-          key={plant.id}
-          plant={plant}
-          quantity={quantities[plant.id] || 1}
-          onQuantityChange={(quantity) => handleQuantityChange(plant.id, quantity)}
-          addToCart={addToCart} 
-          setCart={setCart}
-          currentUser={currentUser}
-        />
-      ))}
+    <div className="container">
+      <div className="row">
+        {plants.map((plant) => (
+          <PlantCard
+            key={plant.id}
+            plant={plant}
+            quantity={quantities[plant.id] || 1}
+            onQuantityChange={(quantity) => handleQuantityChange(plant.id, quantity)}
+            addToCart={addToCart}
+            setCart={setCart}
+            currentUser={currentUser}
+            selectedRole={selectedRole}
+            deletePlant={deletePlant}
+            currentStaff={currentStaff}
+            isStaffLoggedIn={isStaffLoggedIn}
+          />
+        ))}
+      </div>
     </div>
   );
 }

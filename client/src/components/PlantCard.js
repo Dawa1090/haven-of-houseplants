@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./PlantCard.css"; 
+import "./PlantCard.css";
 
-function PlantCard({ plant, addToCart, currentUser }) {
+function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, isStaffLoggedIn }) {
   const [stock, setStock] = useState(true);
   const [quantity, setQuantity] = useState(1);
   //console.log(currentUser)
@@ -13,30 +13,48 @@ function PlantCard({ plant, addToCart, currentUser }) {
     }
   };
 
+  const handleRemove = () => {
+    deletePlant(plant.id);
+  }
+
   return (
-    <div className="card">
-      <img src={plant.image} alt={plant.name} />
-      <h4>{plant.name}</h4>
-      <p>Price: ${plant.price}</p>
-      
-        <button onClick={() => setStock(!stock)} className="primary">
-          In Stock
-        </button>
-      
-      {currentUser && currentUser.username ? (
-      <input
-        type="number"
-        value={quantity}
-        onChange={(e) => setQuantity(e.target.value)}
-        min="1"
-      />
-      ) : null}
-      {currentUser && currentUser.username ? (
-        <button onClick={handleAddToCartClick}>Add to Cart</button>
-      ) : null}
-    
-                
+
+    <div className="col">
+
+
+      <div className="card" style={{ minWidth: '500px' }} >
+
+        <img src={plant.image} className="card-img-top" alt={plant.name} style={{ minWidth: '400px' }} />
+        <div className="card-body">
+          <h5 className="card-title">{plant.name}</h5>
+
+          <p className="card-text">Price: ${plant.price}</p>
+
+
+
+          {currentUser && currentUser.username ? (
+            <input
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              min="1"
+              className="btn-margin"
+            />
+          ) : null}
+          {currentUser && currentUser.username ? (
+            <button onClick={handleAddToCartClick}>Add to Cart</button>
+          ) : null}
+
+          {isStaffLoggedIn ? (
+            <button onClick={handleRemove}>Remove Item</button>
+          ) : null}
+        </div>
+      </div>
+
     </div>
+
+
+
   );
 }
 

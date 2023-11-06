@@ -1,34 +1,44 @@
+/* Modify styles for specific links */
+.navbar a {
+  text-decoration: none;
+  color: #1a9d32;
+  /* Link color */
+  margin: 0 10px;
+  /* Add spacing between links */
+  font-weight: bold;
+  /* Make the links bold */
+}
 
-  /* style.css */
-.navbar {
-    background-color: #eee3e3;
-    color: #1a9d32;
-    padding: 20px;
-  }
-  
-  /* Modify styles for specific links */
-  .navbar a {
-    text-decoration: none;
-    color: #1a9d32; /* Link color */
-    margin: 0 10px; /* Add spacing between links */
-    font-weight: bold; /* Make the links bold */
-  }
-  
-  /* Style the "Home" link */
-  .navbar a.Home {
-    font-size: 18px;
-  }
-  
-  /* Style the "Plants" link */
-  .navbar a.Plants {
-    font-size: 18px;
-  }
-  
-  /* Style the "Shopping Cart" link */
-  .navbar a.Cart {
-    font-size: 18px;
-  }
-  
-  .btn-margin {
-    margin-right: 10px;
-  }
+/* Style the "Home" link */
+.navbar a.Home {
+  font-size: 18px;
+}
+
+/* Style the "Plants" link */
+.navbar a.Plants {
+  font-size: 18px;
+}
+
+/* Style the "Shopping Cart" link */
+.navbar a.Cart {
+  font-size: 18px;
+}
+
+.btn-margin {
+  margin-right: 10px;
+}
+
+.cartItems {
+  align-items: center;
+}
+
+.plant-container {
+  display: flex;
+}
+
+.landingContainer {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}

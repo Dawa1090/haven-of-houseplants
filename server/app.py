@@ -54,10 +54,6 @@ def check_user_session():
     else:
         return {"message": "No user logged in"}, 401
 
-# @app.route("/logout", methods=["DELETE"])
-# def logout():
-#     session.pop("user_id")
-#     return {"message": "Logged out"}, 200
 
 @app.route("/logout", methods=["DELETE"])
 def logout():

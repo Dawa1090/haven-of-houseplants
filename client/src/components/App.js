@@ -5,7 +5,6 @@ import PlantPage from "./PlantPage";
 import PlantList from "./PlantList";
 import ShoppingCart from "./ShoppingCart";
 import Navbar from "./Navbar";
-import StaffPage from "./StaffPage";
 
 
 function App() {
@@ -85,6 +84,7 @@ function App() {
   function logout() {
     fetch("/logout", { method: "DELETE" }).then((res) => {
       if (res.ok) {
+        setCurrentStaff(null);
         setCurrentUser(null);
         setSelectedRole(null);
       }
@@ -160,7 +160,6 @@ function App() {
     })
       .then((response) => {
         if (response.ok) {
-          // Filter out the deleted plant from the array
           const updatedPlants = plants.filter((plant) => plant.id !== plantId);
           setPlants(updatedPlants);
         } else {
@@ -211,13 +210,19 @@ function App() {
   };
 
 
+
   console.log(selectedRole);
 
   return (
     <div className="App">
       <Router>
         <Navbar
-          currentUser={currentUser} />
+          isLoggedIn={isLoggedIn}
+          logout={logout}
+          query={query}
+          onUpdateQuery={onUpdateQuery}
+        />
+        
         <Switch>
           <Route path="/" exact>
             <Home
@@ -232,32 +237,30 @@ function App() {
               selectedRole={selectedRole}
               setSelectedRole={setSelectedRole}
               isLoggedIn={isLoggedIn}
+              isStaffLoggedIn={isStaffLoggedIn}
             />
           </Route>
 
-
-
-
           <Route path="/plants" exact>
+            <PlantPage
+              plants={filterPlants}
+              onAddPlant={onAddPlant}
+              query={query}
+              onUpdateQuery={onUpdateQuery}
+              cart={cart}
+              addToCart={addToCart}
+              checkout={checkout}
+              currentUser={currentUser}
+              selectedRole={selectedRole}
+              isLoggedIn={isLoggedIn}
+              isStaffLoggedIn={isStaffLoggedIn}
+              deletePlant={deletePlant}
+              currentStaff={currentStaff}
+            />
 
-
-            
-              <PlantPage
-                plants={filterPlants}
-                onAddPlant={onAddPlant}
-                query={query}
-                onUpdateQuery={onUpdateQuery}
-                cart={cart}
-                addToCart={addToCart}
-                removeFromCart={removeFromCart}
-                checkout={checkout}
-                currentUser={currentUser}
-                selectedRole={selectedRole}
-                isLoggedIn={isLoggedIn}
-                isStaffLoggedIn={isStaffLoggedIn}
-              />
-            
           </Route>
+
+
           <Route path="/cart" exact>
             {currentUser && <ShoppingCart
               cart={cart}
