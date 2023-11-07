@@ -1,9 +1,11 @@
 
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 
 function Login({ attemptLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory()
 
   const handleChangeUsername = (e) => setUsername(e.target.value);
   const handleChangePassword = (e) => setPassword(e.target.value);
@@ -11,6 +13,7 @@ function Login({ attemptLogin }) {
   function handleSubmit(e) {
     e.preventDefault();
     attemptLogin({ username, password });
+    history.push("/plants");
   }
 
   return (

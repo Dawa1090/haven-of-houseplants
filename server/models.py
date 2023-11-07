@@ -26,6 +26,7 @@ class Plant(db.Model, SerializerMixin):
     name = db.Column(db.String, nullable=False)
     image = db.Column(db.String)
     price = db.Column(db.Float)
+    discounted_price = db.Column(db.Float, nullable=True)
 
 class Staff(db.Model, SerializerMixin):
     __tablename__ = "staff_table"

@@ -187,6 +187,13 @@ def delete_plant(id: int):
 
     return make_response(jsonify({}), 200)
 
+@app.route("/discounted_plants", methods=["GET"])
+def get_discounted_plants():
+    discounted_plants = Plant.query.filter(Plant.discounted_price.isnot(None)).all()
+    data = [plant.to_dict() for plant in discounted_plants]
+    return make_response(jsonify(data), 200)
+
+
 
 
 

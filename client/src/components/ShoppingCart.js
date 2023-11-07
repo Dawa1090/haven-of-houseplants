@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from "react";
+import "./style.css"
 
 function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, selectedRole, deleteItem}) {
   const [plants, setPlants] = useState([]);
@@ -68,6 +69,9 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
 
 
 
+
+      <div className="cart-payment">
+      <div className="cart-box">
       <div className="col-md-5 col-lg-4 order-md-last">
         <h4 className="d-flex justify-content-between align-items-center mb-3">
           <span className="text-primary">Total Items</span>
@@ -104,6 +108,12 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
             </button>
           </div>
         </form>
+        </div>
+        </div>
+        </div>
+
+
+        <div className="cart-box">
         <h4 className="mb-3">Billing address</h4>
         <form className="needs-validation" noValidate>
           <div className="mb-3">
@@ -172,6 +182,8 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
               onChange={handleBillingAddressChange}
             />
           </div>
+        </form>
+        
 
           <div className="mb-3">
             <div className="form-check">
@@ -198,9 +210,16 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
               </label>
             </div>
           </div>
+          </div>
+
+
+          
+
+
+          <div className="cart-box">
 
           <h4 className="mb-3">Payment</h4>
-
+          
           <div className="my-3">
             <div className="form-check">
               <input
@@ -294,6 +313,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
               />
             </div>
           </div>
+          </div>
 
 
 
@@ -307,12 +327,6 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
               <li className="list-inline-item"><a href="#">Support</a></li>
             </ul>
           </footer>
-
-
-
-
-        </form>
-      </div>
     </div>
   );
 }

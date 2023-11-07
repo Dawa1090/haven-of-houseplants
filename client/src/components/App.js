@@ -1,16 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import Home from "../pages/Home";
 import PlantPage from "./PlantPage";
 import PlantList from "./PlantList";
 import ShoppingCart from "./ShoppingCart";
 import Navbar from "./Navbar";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import LoginPage from "../pages/LoginPage";
+import StaffLogin from "../pages/StaffLogin";
 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentStaff, setCurrentStaff] = useState()
   const [selectedRole, setSelectedRole] = useState("customer");
+  const history = useHistory();
+
+  const [discountedPlants, setDiscountedPlants] = useState([]);
+
+  console.log("app")
+  useEffect(() => {
+    fetch("/discounted_plants")
+      .then((response) => response.json())
+      .then((data) => setDiscountedPlants(data))
+      .catch((error) => console.error("Error fetching discounted plants: ", error));
+  }, []);
 
 
 
@@ -71,7 +87,8 @@ function App() {
         }
       })
       .then((data) => {
-        console.log(data); setCurrentStaff(data)
+        console.log(data);
+        setCurrentStaff(data);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -100,21 +117,21 @@ function App() {
     });
   }
 
-  useEffect(() => {
-    fetch("/check_session").then((res) => {
-      if (res.ok) {
-        res.json().then((user) => setCurrentUser(user));
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/check_session").then((res) => {
+  //     if (res.ok) {
+  //       res.json().then((user) => setCurrentUser(user));
+  //     }
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    fetch("/check_staff_session").then((res) => {
-      if (res.ok) {
-        res.json().then((staff) => setCurrentStaff(staff));
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/check_staff_session").then((res) => {
+  //     if (res.ok) {
+  //       res.json().then((staff) => setCurrentStaff(staff));
+  //     }
+  //   });
+  // }, []);
 
 
 
@@ -218,11 +235,14 @@ function App() {
       <Router>
         <Navbar
           isLoggedIn={isLoggedIn}
+          isStaffLoggedIn={isStaffLoggedIn}
           logout={logout}
           query={query}
           onUpdateQuery={onUpdateQuery}
+          currentUser={currentUser}
+          currentStaff={currentStaff}
         />
-        
+
         <Switch>
           <Route path="/" exact>
             <Home
@@ -238,6 +258,18 @@ function App() {
               setSelectedRole={setSelectedRole}
               isLoggedIn={isLoggedIn}
               isStaffLoggedIn={isStaffLoggedIn}
+              discountedPlants={discountedPlants}
+
+
+            />
+          </Route>
+          <Route path="/login">
+            <LoginPage
+              setSelectedRole={setSelectedRole}
+              selectedRole={selectedRole}
+              attemptLogin={attemptLogin}
+              attemptSignup={attemptSignup}
+              attemptStaffLogin={attemptStaffLogin}
             />
           </Route>
 
@@ -257,9 +289,7 @@ function App() {
               deletePlant={deletePlant}
               currentStaff={currentStaff}
             />
-
           </Route>
-
 
           <Route path="/cart" exact>
             {currentUser && <ShoppingCart

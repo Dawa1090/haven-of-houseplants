@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 import StaffLogin from "./StaffLogin";
+import { Link } from "react-router-dom";
+import './home.css'
 
-function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, logoutStaff, attemptStaffLogin, selectedRole, setSelectedRole, isLoggedIn, isStaffLoggedIn }) {
 
+function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, logoutStaff, attemptStaffLogin, selectedRole, setSelectedRole, isLoggedIn, isStaffLoggedIn, discountedPlants }) {
 
 
     useEffect(() => {
@@ -20,17 +22,45 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
         <div className="container">
             <div className="jumbotron">
 
-                <h1 class="display-4">Welcome to the Plant Shop</h1>
-                <p class="lead">A place for all the plants.</p>
-                <hr class="my-4" />
+                <h1 className="display-4">A place for all the plants.</h1>
+                
+                <hr className="my-4" />
 
 
                 <div className="landingContainer">
                     <img
-                        src="https://images.unsplash.com/photo-1520412099551-62b6bafeb5bb?auto=format&fit=crop&q=80&w=1887&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        src="https://images.livspace-cdn.com/plain/https://jumanji.livspace-cdn.com/magazine/wp-content/uploads/2017/11/27162454/fb-cover-1-2.jpg"
                         alt="Plants"
-                        style={{ width: "20%", height: "auto" }}
+                        style={{ width: "100%", height: "auto" }}
                     />
+
+
+                    <div className="promotional-sale">
+                        <h2>Promotional Sale: Save on Select Plants!</h2>
+                        <p>Check out our exclusive collection of plants on sale.</p>
+                    </div>
+
+                    <div className="discounted-plants">
+                        <div className="plant-cards-container">
+                            {discountedPlants.map((plant) => (
+                                <div key={plant.id} >
+                                    <div className="thumbnail">
+                                        <img className="thumb-img" src={plant.image} alt={plant.name} />
+                                        </div>
+                                        <h4>{plant.name}</h4>
+                                        <p>Price: ${plant.price}</p>
+                                        <p>Discounted Price: ${plant.discounted_price}</p>
+                                    </div>
+                            ))}
+                        </div>
+                    </div>
+
+
+                    
+                    <Link to="/plants" className="btn btn-primary">
+                        Shop Now
+                    </Link>
+
                     {currentUser && currentUser.username ? (
                         <div>
                             <h2>Welcome {currentUser.username}!</h2>
@@ -43,7 +73,7 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
                         : (
                             <div>
                                 {/* Render login forms based on the selected role */}
-                                {selectedRole === "customer" ? (
+                                {/* {selectedRole === "customer" ? (
                                     <>
                                         <Login attemptLogin={attemptLogin} />
                                         <Signup attemptSignup={attemptSignup} />
@@ -51,20 +81,12 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
 
                                 ) : (
                                     <StaffLogin attemptStaffLogin={attemptStaffLogin} />
-                                )}
+                                )} */}
 
                             </div>
                         )}
 
-                    {/* Role selection buttons */}
-
-                    {isLoggedIn || isStaffLoggedIn ? "" : (
-                        <div>
-                            <p>Select your role:</p>
-                            <button className="btn btn-primary btn-margin" onClick={() => setSelectedRole("customer")}>Customer</button>
-                            <button className="btn btn-primary" onClick={() => setSelectedRole("staff")}>Staff</button>
-                        </div>
-                    )}
+                    
 
                     <footer className="py-3 my-4">
                         <ul className="nav justify-content-center border-bottom pb-3 mb-3">

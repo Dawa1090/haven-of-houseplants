@@ -9,20 +9,7 @@
   /* Make the links bold */
 }
 
-/* Style the "Home" link */
-.navbar a.Home {
-  font-size: 18px;
-}
 
-/* Style the "Plants" link */
-.navbar a.Plants {
-  font-size: 18px;
-}
-
-/* Style the "Shopping Cart" link */
-.navbar a.Cart {
-  font-size: 18px;
-}
 
 .btn-margin {
   margin-right: 10px;
@@ -37,8 +24,25 @@
 }
 
 .landingContainer {
-  display: flex;
+  display: center;
   flex-direction: column;
   align-content: center;
-  align-items: center;
+  align-items: flex-end;
+}
+
+.cart-box {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+
+.btn-logout {
+  text-decoration: none;
+  color: #1a9d32;
+  margin: 0 10px;
+  font-weight: bold;
+  cursor: pointer;
 }

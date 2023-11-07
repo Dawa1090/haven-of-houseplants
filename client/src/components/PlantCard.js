@@ -4,8 +4,8 @@ import "./PlantCard.css";
 function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, isStaffLoggedIn }) {
   const [stock, setStock] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  //console.log(currentUser)
   const handleAddToCartClick = () => {
+
 
     if (quantity > 0) {
       // Call the addToCart function with the plant's data and the specified quantity
@@ -17,11 +17,9 @@ function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, i
     deletePlant(plant.id);
   }
 
+
   return (
-
     <div className="col">
-
-
       <div className="card" style={{ minWidth: '500px' }} >
 
         <img src={plant.image} className="card-img-top" alt={plant.name} style={{ minWidth: '400px' }} />
@@ -29,9 +27,7 @@ function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, i
           <h5 className="card-title">{plant.name}</h5>
 
           <p className="card-text">Price: ${plant.price}</p>
-
-
-
+          {plant.discounted_price ? <p className="card-text">Discounted Price: ${plant.discounted_price}</p> : null}
           {currentUser && currentUser.username ? (
             <input
               type="number"

@@ -10,4 +10,20 @@
     text-align: center;
     padding: 20px;
   }
+  .thumb-img{
+    object-fit: cover;
+    overflow: hidden;
+    height: 30vh; 
+    width : 30vw;
+    margin-bottom: 10px;
+ }  
+
+ .plant-cards-container {
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 10px; 
+  justify-content: center; 
+ }
+
+ 
   

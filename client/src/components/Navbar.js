@@ -2,24 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import './style.css';
 
-function Navbar({ isLoggedIn, logout, query, onUpdateQuery }) {
+function Navbar({ isLoggedIn, isStaffLoggedIn, logout, query, onUpdateQuery, login, currentUser, currentStaff }) {
   //console.log(currentUser)
   return (
     <div >
 
       <nav className="navbar navbar-default navbar-fixed-top navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
+
           <a className="navbar-brand">
             <i className="bi bi-tree-fill"></i>
-            <span className="logo" role="img">
-              🌱
-            </span>
           </a>
+          
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <div className="nav-link active" aria-current="page">
+                <div className="nav-link active">
                   <Link className='Home' to='/'>Home</Link>
                 </div>
               </li>
@@ -43,11 +42,19 @@ function Navbar({ isLoggedIn, logout, query, onUpdateQuery }) {
 
             <form className="d-flex" role="search">
               <div className="nav-link">
-                <Link className='Plants' to='/plants'>{isLoggedIn && <Link className='Cart' to='/cart'>Shopping Cart</Link>}</Link>
+                <div>{isLoggedIn && <Link className='Cart' to='/cart'>Shopping Cart</Link>}</div>
               </div>
-              <div className="nav-link" onClick={logout}>
-                <Link to='/'>Log Out</Link>
-              </div>
+
+              {isStaffLoggedIn || isLoggedIn ? (
+                <div className="nav-link" >
+                  <Link className="btn-logout" to='/' onClick={logout}>Log out</Link>
+                </div>
+              ) : (
+                <div className="nav-link">
+                  <Link to='/login'>Log In</Link>
+                </div>
+              )
+              }
             </form>
           </div>
         </div>

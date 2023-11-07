@@ -7,6 +7,7 @@ import Search from "./Search";
 
 function PlantPage({ plants, onAddPlant, query, onUpdateQuery, cart, removeFromCart, checkout, addToCart, currentUser, selectedRole, isLoggedIn, isStaffLoggedIn, deletePlant, currentStaff }) {
 
+  console.log("plant page")
   console.log(selectedRole)
   return (
     <main>

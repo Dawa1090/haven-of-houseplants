@@ -10,11 +10,13 @@
     border-radius: 8px;
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: auto;
+    
   }
   
   .card img {
-    max-width: 40%; /* Set the maximum width to 80% of the parent container */
-    height: auto;
+    width: 100%;
+    max-height: auto;
   }
   
   .card h4 {
@@ -25,6 +27,7 @@
   .card p {
     font-size: 1.2rem;
     margin: 5px 0;
+    color:green;
   }
   
   .card button {

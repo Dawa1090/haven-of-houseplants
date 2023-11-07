@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 function StaffLogin({ attemptStaffLogin }) {
     const [staffname, setStaffname] = useState("");
@@ -14,7 +14,7 @@ function StaffLogin({ attemptStaffLogin }) {
       e.preventDefault();
       // Send a request to the Flask back end with the "staff" role
       attemptStaffLogin({ staffname, password, role: "staff" });
-      //history.push("/staff");
+      history.push("/plants");
     }
   
     return (
