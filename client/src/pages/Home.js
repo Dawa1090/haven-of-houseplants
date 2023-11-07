@@ -40,6 +40,8 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
                         <p>Check out our exclusive collection of plants on sale.</p>
                     </div>
 
+                    
+
                     <div className="discounted-plants">
                         <div className="plant-cards-container">
                             {discountedPlants.map((plant) => (
@@ -57,7 +59,7 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
 
 
                     
-                    <Link to="/plants" className="btn btn-primary">
+                    <Link to="/plants#top" className="btn btn-primary">
                         Shop Now
                     </Link>
 

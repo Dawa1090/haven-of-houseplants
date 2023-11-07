@@ -8,7 +8,6 @@ function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, i
 
 
     if (quantity > 0) {
-      // Call the addToCart function with the plant's data and the specified quantity
       addToCart(plant, quantity);
     }
   };
@@ -19,15 +18,25 @@ function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, i
 
 
   return (
+    
+   
     <div className="col">
-      <div className="card" style={{ minWidth: '500px' }} >
+      
+    
+       <div className="thumbnail" >
 
-        <img src={plant.image} className="card-img-top" alt={plant.name} style={{ minWidth: '400px' }} />
-        <div className="card-body">
-          <h5 className="card-title">{plant.name}</h5>
+         <img src={plant.image} className="thumb-img" alt={plant.name} style={{ minWidth: '400px' }} />
+        
+         <h5 className="card-title">{plant.name}</h5>
 
-          <p className="card-text">Price: ${plant.price}</p>
-          {plant.discounted_price ? <p className="card-text">Discounted Price: ${plant.discounted_price}</p> : null}
+        <p className="card-text">Price: ${plant.price}</p>
+         {plant.discounted_price ? <p className="card-text">Discounted Price: ${plant.discounted_price}</p> : null}
+         
+
+      
+      
+
+
           {currentUser && currentUser.username ? (
             <input
               type="number"
@@ -47,7 +56,7 @@ function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, i
         </div>
       </div>
 
-    </div>
+    // </div>
 
 
 

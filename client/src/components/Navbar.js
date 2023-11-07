@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './style.css';
 
 function Navbar({ isLoggedIn, isStaffLoggedIn, logout, query, onUpdateQuery, login, currentUser, currentStaff }) {
-  //console.log(currentUser)
+  
   return (
     <div >
 
@@ -29,13 +29,13 @@ function Navbar({ isLoggedIn, isStaffLoggedIn, logout, query, onUpdateQuery, log
               </li>
 
 
-              <li>
+              {/* <li>
                 <input type="text"
                   id="search"
                   placeholder="Search Plant..."
                   value={query}
                   onChange={onUpdateQuery} className="form-control me-2" aria-label="Search" />
-              </li>
+              </li> */}
 
 
             </ul>
