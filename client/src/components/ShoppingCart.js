@@ -313,7 +313,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
             </div>
           </div>
           </div>
-          <button className="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+          <button className="w-100 btn btn-primary btn-lg" type="submit" onClick={()=>window.alert("Thank-You for Shopping - Your credit card info is safe with me")}>Continue to checkout</button>
     </div>
   );
 }
