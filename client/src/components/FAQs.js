@@ -39,7 +39,7 @@ function FAQs() {
       <div className="about-box">
         <h2>Do you offer international shipping?</h2>
         <p>
-          Currently, we only offer shipping within the [Your Country]. We're working to expand our service to more locations in the future.
+          Currently, we only offer shipping within the USA. We're working to expand our service to more locations in the future.
         </p>
       </div>
 
