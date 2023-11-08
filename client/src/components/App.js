@@ -197,6 +197,15 @@ function App() {
   const [cart, setCart] = useState([]);
   const [quantity, setQuantity] = useState({ dummy: 1 });
 
+  useEffect(() => {
+    const initialCart = JSON.parse(localStorage.getItem("cartItems"));
+    console.log("local storage get")
+    console.log(initialCart)
+    if (initialCart) {
+      setCart(initialCart);
+    }
+  }, []);
+
   //!!!do something with quantity
   const addToCart = (plant, quantity) => {
     const checkoutPlant = { id: plant.id, name: plant.name, price: plant.price, quantity: quantity };
@@ -205,6 +214,7 @@ function App() {
     setQuantity(previousState => { return { ...previousState, [plant.id]: quantity } });
     console.log("quantity:", quantity);
     console.log("updatedCart: ", updatedCart);
+    localStorage.setItem("cartItems",JSON.stringify(updatedCart))
     setCart(updatedCart);
 
   };

@@ -1,8 +1,9 @@
 # Plant E-commerce Web Application
 
-This is a web application built using React for a plant e-commerce platform. Users can browse and purchase plants, manage their shopping cart, and learn more about the company. Staff members can log in to manage plants and view plants data.
+Welcome to the Plant E-commerce Web Application! This platform is designed to provide users with the ability to browse and purchase plants while also offering a plant management system for staff members. The application is built using Flask for the backend and React for the frontend.
 
-##Features
+
+## Features
 . User Authentication: Users can sign up, log in, and log out. Staff members also have a separate login.
 
 . Browse and Purchase Plants: Users can view a list of available plants, add them to their shopping cart, and proceed to checkout.
@@ -21,31 +22,22 @@ This is a web application built using React for a plant e-commerce platform. Use
 3. Start the development server: npm start
 4. Open a web browser and visit http://localhost:3000 to access the application.
 
-## Application Structure
-src/components: Contains React components used to build the user interface, such as the homepage, plant list, shopping cart, and more.
 
-src/pages: Contains the main pages of the application, like the homepage, login page, and signup page.
-
-src/App.js: The main application component that sets up the routes and handles user authentication and state management.
-
-server.js: A simple server file to mock API requests for plant data and user authentication.
 
 
 ## Technology Stack
+The technology stack for this application includes:
 
-React for the frontend.
+Frontend: React for building the user interface.
 
-React Router for routing.
+Routing: React Router for handling navigation within the application.
 
-Axios for making API requests.
+Backend: Flask, a Python web framework, for managing API requests and server-side logic.
 
-Server.js to mock API endpoints.
 
 ## Acknowledgments
 
-This project is a demonstration of a plant e-commerce web application developed using React.
-
-It can be used as a starting point for similar web applications.
+This project serves as a demonstration of a plant e-commerce web application developed using React and Flask.
 
 Please feel free to customize and expand upon this application to meet your specific requirements. Happy coding!
 

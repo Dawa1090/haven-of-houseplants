@@ -3,14 +3,23 @@ import React, { useState, useEffect } from "react";
 import "./style.css"
 
 function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, selectedRole, deleteItem}) {
-  // const [plants, setPlants] = useState([]);
+  const [plants, setPlants] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
-  console.log(cartItems);
+  //console.log(cartItems);
+
+  // useEffect(() => {
+  //   const initialPlantItems = JSON.parse(localStorage.getItem("plantItems")) || [];
+  //   setPlants(initialPlantItems);
+  // }, []);
+
+
 
 
   useEffect(() => {
-    const initialCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const initialCart = JSON.parse(localStorage.getItem("cartItems"));
+    console.log("local storage get")
+    console.log(initialCart)
     setCartItems(initialCart);
   }, []);
 
@@ -19,7 +28,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
 
   const handleCheckout = () => {
     window.alert("Thank-You for Shopping - Your credit card info is safe with me");
-    setCartItems([]);
+    // setCartItems([]);
     checkout([]);
     localStorage.removeItem("cartItems");
   };
