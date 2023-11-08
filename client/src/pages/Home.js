@@ -1,9 +1,6 @@
 
 
-import React, { useEffect, useState } from "react";
-import Login from "./Login";
-import Signup from "./Signup";
-import StaffLogin from "./StaffLogin";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import './home.css'
 
@@ -19,22 +16,17 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
 
     return (
 
-        <div className="container">
+        <div className="homeContainer">
             <div className="jumbotron">
 
                 <h1 className="display-4">A place for all the plants.</h1>
                 
                 <hr className="my-4" />
-
-
                 <div className="landingContainer">
                     <img
                         src="https://images.livspace-cdn.com/plain/https://jumanji.livspace-cdn.com/magazine/wp-content/uploads/2017/11/27162454/fb-cover-1-2.jpg"
                         alt="Plants"
-                        style={{ width: "100%", height: "auto" }}
                     />
-
-
                     <div className="promotional-sale">
                         <h2>Promotional Sale: Save on Select Plants!</h2>
                         <p>Check out our exclusive collection of plants on sale.</p>
@@ -87,19 +79,6 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
 
                             </div>
                         )}
-
-                    
-
-                    <footer className="py-3 my-4">
-                        <ul className="nav justify-content-center border-bottom pb-3 mb-3">
-                            <li className="nav-item"><a href="#" className="nav-link px-2 text-body-secondary">Home</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link px-2 text-body-secondary">Features</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link px-2 text-body-secondary">Pricing</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link px-2 text-body-secondary">FAQs</a></li>
-                            <li className="nav-item"><a href="#" className="nav-link px-2 text-body-secondary">About</a></li>
-                        </ul>
-                        <p className="text-center text-body-secondary">© 2023 Company, Inc</p>
-                    </footer>
                 </div>
             </div>
         </div>

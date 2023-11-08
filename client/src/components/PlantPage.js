@@ -5,13 +5,16 @@ import Search from "./Search";
 
 
 
-function PlantPage({ plants, onAddPlant, query, onUpdateQuery, cart, removeFromCart, checkout, addToCart, currentUser, selectedRole, isLoggedIn, isStaffLoggedIn, deletePlant, currentStaff }) {
+
+function PlantPage({ plants, onAddPlant, query, onUpdateQuery, cart, removeFromCart, checkout, addToCart, currentUser, selectedRole, isLoggedIn, isStaffLoggedIn, deletePlant, currentStaff}) {
 
 
   useEffect(() => {
     window.scrollTo(0, 0); 
   }, []);
 
+
+  
 
 return (
   <main>

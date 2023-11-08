@@ -10,13 +10,15 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import LoginPage from "../pages/LoginPage";
 import StaffLogin from "../pages/StaffLogin";
+import About from "./About";
+import FAQs from "./FAQs";
+import ContactUs from "./ContactUs";
 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentStaff, setCurrentStaff] = useState()
   const [selectedRole, setSelectedRole] = useState("customer");
-  const history = useHistory();
 
   const [discountedPlants, setDiscountedPlants] = useState([]);
 
@@ -192,28 +194,18 @@ function App() {
   const isLoggedIn = currentUser && Object.keys(currentUser).length > 0;
   const isStaffLoggedIn = currentStaff && Object.keys(currentStaff).length > 0;
 
-  console.log()
   const [cart, setCart] = useState([]);
   const [quantity, setQuantity] = useState({ dummy: 1 });
-
-
 
   //!!!do something with quantity
   const addToCart = (plant, quantity) => {
     const checkoutPlant = { id: plant.id, name: plant.name, price: plant.price, quantity: quantity };
-
     const updatedCart = [...cart.filter((obj) => obj.id !== checkoutPlant.id), { ...checkoutPlant }];
 
-    console.log(updatedCart);
-
-    //const updatedCart = [...cart, checkoutPlant];
-
-    //console.log(plant)
     setQuantity(previousState => { return { ...previousState, [plant.id]: quantity } });
-    console.log(quantity);
+    console.log("quantity:", quantity);
+    console.log("updatedCart: ", updatedCart);
     setCart(updatedCart);
-    //setCart(previousState => { return {...previousState, [plant.id]: quantity}});
-
 
   };
 
@@ -226,9 +218,6 @@ function App() {
     setCart([]); // Clear the cart upon checkout
   };
 
-
-
-  console.log(selectedRole);
 
   return (
     <div className="App">
@@ -261,6 +250,7 @@ function App() {
               discountedPlants={discountedPlants}
 
 
+
             />
           </Route>
           <Route path="/login">
@@ -291,6 +281,12 @@ function App() {
             />
           </Route>
 
+          <Route path="/about" exact component={About} />
+
+          <Route path="/FAQs" exact component={FAQs} />
+
+          <Route path="/contact" exact component={ContactUs} />
+
           <Route path="/cart" exact>
             {currentUser && <ShoppingCart
               cart={cart}
@@ -304,7 +300,16 @@ function App() {
         </Switch>
       </Router>
 
-      {isLoggedIn}
+      <footer className="py-3 my-4">
+        <ul className="nav justify-content-center border-bottom pb-3 mb-3">
+          <li className="nav-item"><a href="/" className="nav-link px-2 text-body-secondary">Home</a></li>
+          <li className="nav-item"><a href="/contact" className="nav-link px-2 text-body-secondary">Contact Us</a></li>
+          <li className="nav-item"><a href="/About" className="nav-link px-2 text-body-secondary">About</a></li>
+          <li className="nav-item"><a href="/FAQs" className="nav-link px-2 text-body-secondary">FAQs</a></li>
+          <li className="nav-item"><a href="/contact" className="nav-link px-2 text-body-secondary">Contact Us</a></li>
+        </ul>
+        <p className="text-center text-body-secondary">© 2023 Company, Inc</p>
+      </footer>
 
 
     </div>

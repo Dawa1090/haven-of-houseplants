@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './style.css';
 
 function Navbar({ isLoggedIn, isStaffLoggedIn, logout, query, onUpdateQuery, login, currentUser, currentStaff }) {
-  
+
   return (
     <div >
 
@@ -13,7 +13,7 @@ function Navbar({ isLoggedIn, isStaffLoggedIn, logout, query, onUpdateQuery, log
           <a className="navbar-brand">
             <i className="bi bi-tree-fill"></i>
           </a>
-          
+
 
           <div className="navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -27,6 +27,26 @@ function Navbar({ isLoggedIn, isStaffLoggedIn, logout, query, onUpdateQuery, log
                   <Link className='Plants' to='/plants'>Plants</Link>
                 </div>
               </li>
+
+
+              {/* <li className="nav-item">
+                <div className="nav-link">
+                  <Link to="/about">About</Link>
+                </div>
+              </li>
+
+              <li className="nav-item">
+                <div className="nav-link">
+                  <Link to="/FAQs">FAQs</Link>
+                </div>
+              </li>
+
+              <li className="nav-item">
+                <div className="nav-link">
+                  <Link to="/contact">Contact Us</Link>
+                </div>
+              </li> */}
+
 
 
               {/* <li>

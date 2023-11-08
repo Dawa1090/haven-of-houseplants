@@ -45,8 +45,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
   console.log(cart)
 
   return (
-    <div className="container">
-
+    <div className="container" style={{'padding':'20px'}}>
       {selectedRole === "customer" ? (
         <main>
           <ul className="list-group mb-3">
@@ -314,19 +313,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
             </div>
           </div>
           </div>
-
-
-
           <button className="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
-
-          <footer className="my-5 pt-5 text-body-secondary text-center text-small">
-            <p className="mb-1">© 2017–2023 Company Name</p>
-            <ul className="list-inline">
-              <li className="list-inline-item"><a href="#">Privacy</a></li>
-              <li className="list-inline-item"><a href="#">Terms</a></li>
-              <li className="list-inline-item"><a href="#">Support</a></li>
-            </ul>
-          </footer>
     </div>
   );
 }

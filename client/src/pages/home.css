@@ -1,15 +1,6 @@
 /* home.css */
 
-.home-container {
-    background-image: url('https://media.istockphoto.com/id/892815818/vector/vector-illustration-with-indoor-houseplants-poster-cover-template-design-with-various.jpg?s=170667a&w=0&k=20&c=pBEmWpZ-2fAiN7P80T525vZrtxeq1tLOpGCSf6htC8E='); /* Replace with the path to your background image */
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    height: 100vh;
-    color: white; 
-    text-align: center;
-    padding: 20px;
-  }
+
   .thumb-img{
     object-fit: cover;
     overflow: hidden;
@@ -33,7 +24,8 @@
 .btn-primary {
   margin: 20px; 
 }
-.container {
+
+.homeContainer {
   text-align: center;
 }
   
