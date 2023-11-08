@@ -22,10 +22,10 @@ function Login({ attemptLogin }) {
         <h2 className="login-title">Login</h2>
 
         <div className="input-group mb-3">
-          <input type="text" className="form-control" placeholder="Username" aria-label="Username" onChange={handleChangeUsername}
+          <input type="text" className="form-control  input-field" placeholder="Username" aria-label="Username" onChange={handleChangeUsername}
             value={username} />
           <span className="input-group-text">::</span>
-          <input className="form-control" placeholder="Password" aria-label="Password" type="password" onChange={handleChangePassword}
+          <input className="form-control  input-field" placeholder="Password" aria-label="Password" type="password" onChange={handleChangePassword}
             value={password} />
           <button className="btn btn-outline-secondary" type="submit">Login</button>
         </div>

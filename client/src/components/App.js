@@ -119,13 +119,13 @@ function App() {
     });
   }
 
-  // useEffect(() => {
-  //   fetch("/check_session").then((res) => {
-  //     if (res.ok) {
-  //       res.json().then((user) => setCurrentUser(user));
-  //     }
-  //   });
-  // }, []);
+  useEffect(() => {
+    fetch("/check_session").then((res) => {
+      if (res.ok) {
+        res.json().then((user) => setCurrentUser(user));
+      }
+    });
+  }, []);
 
   // useEffect(() => {
   //   fetch("/check_staff_session").then((res) => {
@@ -303,7 +303,6 @@ function App() {
       <footer className="py-3 my-4">
         <ul className="nav justify-content-center border-bottom pb-3 mb-3">
           <li className="nav-item"><a href="/" className="nav-link px-2 text-body-secondary">Home</a></li>
-          <li className="nav-item"><a href="/contact" className="nav-link px-2 text-body-secondary">Contact Us</a></li>
           <li className="nav-item"><a href="/About" className="nav-link px-2 text-body-secondary">About</a></li>
           <li className="nav-item"><a href="/FAQs" className="nav-link px-2 text-body-secondary">FAQs</a></li>
           <li className="nav-item"><a href="/contact" className="nav-link px-2 text-body-secondary">Contact Us</a></li>

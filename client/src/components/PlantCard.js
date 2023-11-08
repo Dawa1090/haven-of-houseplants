@@ -7,7 +7,7 @@ function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, i
   const handleAddToCartClick = () => {
 
 
-    
+
 
 
     if (quantity > 0) {
@@ -19,7 +19,7 @@ function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, i
     deletePlant(plant.id);
   }
 
-  
+
 
 
   return (
@@ -37,7 +37,7 @@ function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, i
         <h5 className="card-title">{plant.name}</h5>
 
         <p className="card-text">Price: ${plant.price}</p>
-        {plant.discounted_price ? <p className="card-text">Discounted Price: ${plant.discounted_price}</p> : null}
+        {plant.discounted_price ? <p className="card-discount-text">Discounted Price: ${plant.discounted_price}</p> : null}
 
 
         {currentUser && currentUser.username ? (
@@ -58,8 +58,6 @@ function PlantCard({ plant, addToCart, currentUser, currentStaff, deletePlant, i
         ) : null}
       </div>
     </div>
-
-    // </div>
 
 
 

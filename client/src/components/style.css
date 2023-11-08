@@ -1,4 +1,4 @@
-/* Modify styles for specific links */
+
 .navbar a {
   text-decoration: none;
   color: #1a9d32;
@@ -83,7 +83,6 @@
 
 
 
-/* Add these styles to your existing style.css file */
 .image-modal {
   display: block;
   position: fixed;

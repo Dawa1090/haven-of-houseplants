@@ -10,8 +10,7 @@
     border-radius: 8px;
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: auto;
-    
+    height: auto; 
   }
   
   .card img {
@@ -58,4 +57,9 @@
     width : 30vw;
     margin-top: 30px;
  }  
+
+
+.card-title {
+  color : green;
+}
 

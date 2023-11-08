@@ -62,7 +62,6 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
       ) : (
         <div>
           <p>You must be a customer to access the shopping cart.</p>
-          {/* Render something else or nothing */}
         </div>
       )}
 

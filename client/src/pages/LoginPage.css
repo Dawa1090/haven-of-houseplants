@@ -1,0 +1,61 @@
+
+
+.login-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .role-selection-box {
+    display: center;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    
+  }
+  
+  .role-selection-box:hover {
+    transform: scale(1.05);
+  }
+  
+  .role-selection-title {
+    color: #6b8e23;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color:#6b8e23;
+  }
+  
+  .btn-primary {
+    background-color: green;
+    color: #fff;
+  }
+
+
+
+.role-selection-title {
+    text-align: center;
+    color: #6b8e23;
+    font-size: 24px; 
+    font-weight: bold; 
+    letter-spacing: 2px;  
+    
+  }
+
+  .login-form {
+    margin-top: 10px; 
+  }
+  
+  
+ 

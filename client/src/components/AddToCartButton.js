@@ -1,20 +1,3 @@
-// import React from "react";
-// // import { Link } from "react-router-dom";
-
-// function AddToCartButton({ plant, addToCart }) {
-//   const handleAddToCart = () => {
-//     addToCart(plant);
-//   };
-
-//   return (
-//     <div>
-//       <button onClick={handleAddToCart}>Add to Cart</button>
-//       {/* <Link to="/cart">Go to Cart</Link> Add this link to navigate to the cart page */}
-//     </div>
-//   );
-// }
-
-// export default AddToCartButton;
 
 
 

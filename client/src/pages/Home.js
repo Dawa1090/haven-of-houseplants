@@ -20,7 +20,7 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
             <div className="jumbotron">
 
                 <h1 className="display-4">A place for all the plants.</h1>
-                
+
                 <hr className="my-4" />
                 <div className="landingContainer">
                     <img
@@ -32,7 +32,7 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
                         <p>Check out our exclusive collection of plants on sale.</p>
                     </div>
 
-                    
+
 
                     <div className="discounted-plants">
                         <div className="plant-cards-container">
@@ -40,17 +40,17 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
                                 <div key={plant.id} >
                                     <div className="thumbnail">
                                         <img className="thumb-img" src={plant.image} alt={plant.name} />
-                                        </div>
-                                        <h4>{plant.name}</h4>
-                                        <p>Price: ${plant.price}</p>
-                                        <p>Discounted Price: ${plant.discounted_price}</p>
                                     </div>
+                                    <h4>{plant.name}</h4>
+                                    <p>Price: ${plant.price}</p>
+                                    <p>Discounted Price: ${plant.discounted_price}</p>
+                                </div>
                             ))}
                         </div>
                     </div>
 
 
-                    
+
                     <Link to="/plants#top" className="btn btn-primary">
                         Shop Now
                     </Link>
@@ -66,18 +66,7 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
                     )
                         : (
                             <div>
-                                {/* Render login forms based on the selected role */}
-                                {/* {selectedRole === "customer" ? (
-                                    <>
-                                        <Login attemptLogin={attemptLogin} />
-                                        <Signup attemptSignup={attemptSignup} />
-                                    </>
-
-                                ) : (
-                                    <StaffLogin attemptStaffLogin={attemptStaffLogin} />
-                                )} */}
-
-                            </div>
+                        </div>
                         )}
                 </div>
             </div>
