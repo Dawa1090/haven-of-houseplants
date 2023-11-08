@@ -3,11 +3,31 @@ import React, { useState, useEffect } from "react";
 import "./style.css"
 
 function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, selectedRole, deleteItem}) {
-  const [plants, setPlants] = useState([]);
+  // const [plants, setPlants] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
+  console.log(cartItems);
+
+
+  useEffect(() => {
+    const initialCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(initialCart);
+  }, [cart]);
+
+  
+
+
+  const handleCheckout = () => {
+    window.alert("Thank-You for Shopping - Your credit card info is safe with me");
+    setCartItems([]);
+    checkout([]);
+    localStorage.removeItem("cartItems");
+  };
 
 
 
-  const [cartItems, setCartItems] = useState([...cart]);
+
+  // const [cartItems, setCartItems] = useState([...cart]);
   const [promoCode, setPromoCode] = useState("");
   const [billingAddress, setBillingAddress] = useState({
     firstName: "",
@@ -312,7 +332,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
             </div>
           </div>
           </div>
-          <button className="w-100 btn btn-primary btn-lg" type="submit" onClick={()=>window.alert("Thank-You for Shopping - Your credit card info is safe with me")}>Continue to checkout</button>
+          <button className="w-100 btn btn-primary btn-lg" type="submit"  onClick={handleCheckout}>Continue to checkout</button>
     </div>
   );
 }
