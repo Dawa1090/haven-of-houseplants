@@ -61,6 +61,7 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
                             arrows={false} 
                             autoplay={true} 
                             autoplaySpeed={2000}     
+                            speed={500}
                         >
 
                             <div>
