@@ -13,7 +13,7 @@ function Login({ attemptLogin }) {
   function handleSubmit(e) {
     e.preventDefault();
     attemptLogin({ username, password });
-    history.push("/plants");
+    history.push("/");
   }
 
   return (

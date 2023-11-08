@@ -12,7 +12,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
   useEffect(() => {
     const initialCart = JSON.parse(localStorage.getItem("cartItems")) || [];
     setCartItems(initialCart);
-  }, [cart]);
+  }, []);
 
   
 

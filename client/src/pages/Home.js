@@ -21,6 +21,20 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
 
                 <h1 className="display-4">A place for all the plants.</h1>
 
+                {currentUser && currentUser.username ? (
+                        <div>
+                            <h2>Welcome {currentUser.username}!</h2>
+                        </div>
+                    ) : currentStaff && currentStaff.staffname ? (
+                        <div>
+                            <h2>Welcome {currentStaff.staffname}!</h2>
+                        </div>
+                    )
+                        : (
+                            <div>
+                        </div>
+                        )}
+
                 <hr className="my-4" />
                 <div className="landingContainer">
                     <img
@@ -55,19 +69,6 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
                         Shop Now
                     </Link>
 
-                    {currentUser && currentUser.username ? (
-                        <div>
-                            <h2>Welcome {currentUser.username}!</h2>
-                        </div>
-                    ) : currentStaff && currentStaff.staffname ? (
-                        <div>
-                            <h2>Welcome {currentStaff.staffname}!</h2>
-                        </div>
-                    )
-                        : (
-                            <div>
-                        </div>
-                        )}
                 </div>
             </div>
         </div>
