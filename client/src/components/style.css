@@ -2,14 +2,10 @@
 .navbar a {
   text-decoration: none;
   color: #1a9d32;
-  /* Link color */
   margin: 0 10px;
-  /* Add spacing between links */
   font-weight: bold;
-  /* Make the links bold */
+  font-size: 20px;
 }
-
-
 
 .btn-margin {
   margin-right: 10px;

@@ -10,16 +10,12 @@ function Navbar({ isLoggedIn, isStaffLoggedIn, logout, query, onUpdateQuery, log
       <nav className="navbar navbar-default navbar-fixed-top navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
 
-          <a className="navbar-brand">
-            <i className="bi bi-tree-fill"></i>
-          </a>
-
 
           <div className="navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <div className="nav-link active">
-                  <Link className='Home' to='/'>Home</Link>
+                  <Link className='Home' to='/'><i class="bi bi-house-fill"></i></Link>
                 </div>
               </li>
               <li className="nav-item">
@@ -62,7 +58,7 @@ function Navbar({ isLoggedIn, isStaffLoggedIn, logout, query, onUpdateQuery, log
 
             <form className="d-flex" role="search">
               <div className="nav-link">
-                <div>{isLoggedIn && <Link className='Cart' to='/cart'>Shopping Cart</Link>}</div>
+                <div>{isLoggedIn && <Link className='Cart' to='/cart'><i class="bi bi-cart"></i></Link>}</div>
               </div>
 
               {isStaffLoggedIn || isLoggedIn ? (

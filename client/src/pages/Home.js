@@ -17,7 +17,7 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
 
 
     useEffect(() => {
-       
+
     }, []);
 
 
@@ -33,7 +33,10 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
         <div className="homeContainer">
             <div className="jumbotron">
 
-                <h1 className="display-4">A Cozy Haven in Every Home.</h1>
+                {/* <h1 className="display-4">A Cozy Haven in Every Home. </h1> */}
+                <h1 className="display-4">
+                    A <span className="styled-letter">Cozy</span> Haven in Every Home.
+                </h1>
 
                 {currentUser && currentUser.username ? (
                     <div>
@@ -58,9 +61,9 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
                             slidesToShow={1}
                             slidesToScroll={1}
                             dots={false}
-                            arrows={false} 
-                            autoplay={true} 
-                            autoplaySpeed={2000}     
+                            arrows={false}
+                            autoplay={true}
+                            autoplaySpeed={2000}
                             speed={500}
                         >
 
@@ -72,13 +75,13 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
                             </div>
 
                             <div>
-                                <img 
+                                <img
                                     src="https://www.houseplant.co.uk/cdn/shop/files/houseplant_essentials.jpg?v=1698746787&width=1500"
                                     alt="Plants"
                                 />
                             </div>
                         </Slider>
-                        </div>
+                    </div>
 
 
 
@@ -112,10 +115,10 @@ function Home({ currentUser, currentStaff, attemptLogin, attemptSignup, logout, 
                         Shop Now
                     </Link>
 
-                    </div>
-
                 </div>
+
             </div>
+        </div>
     );
 }
 

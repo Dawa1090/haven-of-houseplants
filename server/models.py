@@ -36,6 +36,4 @@ class Staff(db.Model, SerializerMixin):
     password = db.Column(db.String, nullable=False)
     role = db.Column(db.String, default="staff") 
 
-    # def __init__(self, staffname, password):
-    #     self.staffname = staffname
-    #     self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+    

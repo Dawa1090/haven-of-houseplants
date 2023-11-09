@@ -44,5 +44,15 @@
   display: block;
 }
 
+.styled-letter {
+  color: rgba(225, 96, 27, 0.879);
+}
+
+.display-4 {
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+
 
 
