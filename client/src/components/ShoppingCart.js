@@ -37,7 +37,7 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
 
 
   // const [cartItems, setCartItems] = useState([...cart]);
-  const [promoCode, setPromoCode] = useState("");
+  let [promoCode, setPromoCode] = useState("");
   const [billingAddress, setBillingAddress] = useState({
     firstName: "",
     lastName: "",
@@ -53,7 +53,8 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
     const totalQuantity = cart.reduce((total, item) => total + (+item.quantity), 0);
     const itemsTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
     const promoDiscount = promoCode === "EXAMPLECODE" ? 5 : 0;
-    return { totalQuantity, totalAmount: itemsTotal - promoDiscount };
+    let totalAmount = itemsTotal - promoDiscount;
+    return { totalQuantity, totalAmount: totalAmount.toFixed(2) };
   };
 
 
@@ -127,10 +128,10 @@ function ShoppingCart({ cart, removeFromCart, checkout, setCart, isLoggedIn, sel
               type="text"
               className="form-control"
               placeholder="Promo code"
-              value={promoCode}
-              onChange={(e) => setPromoCode(e.target.value)}
             />
-            <button type="button" className="btn btn-secondary">
+            <button type="button" className="btn btn-secondary"
+              onClick={(e) => {setPromoCode(e.target.parentElement.firstElementChild.value)}}
+            >
               Redeem
             </button>
           </div>
