@@ -18,11 +18,12 @@ Welcome to the Plant E-commerce Web Application! This platform is designed to pr
 
 ## Getting Started
 1. Clone this repository to your local machine.
-2. Install the required dependencies: npm install
-3. Start the development server: npm start
-4. Open a web browser and visit http://localhost:3000 to access the application.
-
-
+2. Navigate to the project directory in your terminal.
+3. Install the required Python dependencies using pipenv: pipenv install
+4. Activate the virtual environment: pipenv shell
+5. Install the required frontend dependencies: npm install
+6. Start the development server for both the frontend and backend: npm start - python app.py
+7. Open a web browser and visit http://localhost:3000 to access the application.
 
 
 ## Technology Stack
